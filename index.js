@@ -43,4 +43,17 @@ function startGame() {
     //reset the score and game status 
     score = 0
     timeUp = false
+    //moles start appearing
+    molePeek();
+
+    //timeout to end game after certain amount 
+    setTimeout(() => (timeUp = true), 10000);
 }
+
+//game start once page is loaded
+window.onload = startGame;
+
+
+
+
+
