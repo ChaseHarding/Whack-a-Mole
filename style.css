@@ -45,7 +45,6 @@ body {
     display: none;
 }
 
-
 @keyframes titleAnimation {
     from {
         transform: scale(1); 

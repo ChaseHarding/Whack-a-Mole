@@ -25,11 +25,12 @@ setTimeout(()=> {
 //function for whacking the mole
 function bonk(e) {
     if (!e.isTrusted) return;
-
+ 
     //originally without this code we could click the hole repeatedly and get infinite points 
     //this will check if a mole is currently visible with the 'up' class
-    if (this.classList.containes('up')) {
-
+    if (this.classList.contains('up')) {
+        //so mole clicked confirms that this works
+        console.log('Mole clicked!')
     //score increase!!
     score++;
 
@@ -37,10 +38,14 @@ function bonk(e) {
     document.getElementById('score').textContent = score;
 
     const moleImage = this.querySelector('img'); //grab the mole image
-    moleImage.style.display = none; //when the mole is hit it should disappear
+    moleImage.style.display = 'none'; //when the mole is hit it should disappear
+    //omg the value should be a string, it was interepting it as a variable duh
+
 
     //now hide the mole after getting hit
     this.classList.remove('up');
+    console.log('Mole hidden!')
+    //console log is telling me that none is not defined
     }
 
 }
