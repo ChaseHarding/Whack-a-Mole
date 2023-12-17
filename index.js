@@ -30,7 +30,7 @@ function bonk(e) {
     //this will check if a mole is currently visible with the 'up' class
     if (this.classList.contains('up')) {
         //so mole clicked confirms that this works
-        console.log('Mole clicked!')
+        console.log('Mole clicked!');
     //score increase!!
     score++;
 
@@ -44,7 +44,7 @@ function bonk(e) {
 
     //now hide the mole after getting hit
     this.classList.remove('up');
-    console.log('Mole hidden!')
+    console.log('Mole hidden!');
     //console log is telling me that none is not defined
     }
 
@@ -59,14 +59,25 @@ let timeUp = false;
 
 //function for game start
 function startGame() {
+    console.log('Game started!');
     //reset the score and game status 
-    score = 0
-    timeUp = false
+    score = 0;
+    timeUp = false;
+
+    //update the score display
+    document.getElementById('score').textContent = score;
     //moles start appearing
     molePeek();
+    console.log('Mole peeking');
 
     //timeout to end game after certain amount 
-    setTimeout(() => (timeUp = true), 10000);
+    setTimeout(() => {
+        timeUp = true;
+        console.log('Game over!');
+    }, 10000);
+    //LOL i thought my code wasnt working because the game wasnt restarting
+    //in reality i never coded the game to do that
+
 }
 
 //game start once page is loaded
