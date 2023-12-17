@@ -12,9 +12,12 @@ function molePeek() {
 //this should genereate a random time for the mole to pop up
 const time = Math.random() * 1000 + 500; //random timing
 const hole = randomHole();
+const moleImage = hole.querySelector('img'); //should put the mole image in the hole
+moleImage.style.display = 'block'; //mole image should appear now when molepeek function runs
 hole.classList.add('up'); //adding 'up' to the hole to make the mole pop up
 setTimeout(()=> {
     hole.classList.remove('up'); //timeout to make the mole disappear after a random time
+    moleImage.style.display = 'none'; //mole should hide 
     if (!timeUp) molePeek();
 }, time);
 }
@@ -25,6 +28,9 @@ function bonk(e) {
 
     //score increase!!
     score++;
+
+    const moleImage = this.querySelector('img'); //grab the mole image
+    moleImage.style.display = none; //when the mole is hit it should disappear
 
     //now hide the mole after getting hit
     this.classList.remove('up');
