@@ -2,7 +2,7 @@ const holes = document.querySelectorAll('.hole');
 
 let score = 0;
 
-//function for randome hole selection
+//function for random hole selection
 function randomHole() {
  const index = Math.floor(Math.random() * holes.length)
  return holes[index];
@@ -55,7 +55,26 @@ function bonk(e) {
 holes.forEach(hole => hole.addEventListener('click', bonk));
 
 //timer for game to end
-let timeUp = false;
+// let timeUp = false;
+// this is redudant, globally calling this var is not necessary
+
+
+// lets simplify the code
+function endGame() {
+    console.log('Game over!');
+    timeUp = true;
+
+    // display our Game Over title
+    displayEndGameTitle();
+}
+
+function displayEndGameTitle() {
+    // grab that div
+    let endGameContainer = document.querySelector('.gameOverTitle');
+
+    // display our Game Over div by changing the style
+    endGameContainer.style.display = 'block';
+}
 
 //function for game start
 function startGame() {
@@ -63,6 +82,7 @@ function startGame() {
     //reset the score and game status 
     score = 0;
     timeUp = false;
+    
 
     //update the score display
     document.getElementById('score').textContent = score;
@@ -71,10 +91,10 @@ function startGame() {
     console.log('Mole peeking');
 
     //timeout to end game after certain amount 
-    setTimeout(() => {
-        timeUp = true;
-        console.log('Game over!');
-    }, 10000);
+    setTimeout(endGame, 10000);
+    // calling the endGame function after the timeOut
+    // my mind is melting 
+        
     //LOL i thought my code wasnt working because the game wasnt restarting
     //in reality i never coded the game to do that
 

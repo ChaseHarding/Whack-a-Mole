@@ -16,6 +16,16 @@ body {
    animation: titleAnimation 2s infinite alternate;
 }
 
+.gameOverTitle {
+    display: none; 
+    font-size: 25px;
+    margin-bottom: 20px;
+    /* my first idea is to set a second title to display none and use js to make it visible in the settimeout function that ends the game */
+    /* alternatively we could add a 2nd html page and style it and have the code open that new page instead. */
+    animation: title2Animation 2s infinite alternate;
+    /* i like this simple animation, but should explore alternatives */
+}
+
 .game-container {
     display: flex;
     flex-wrap: wrap;
@@ -48,6 +58,15 @@ body {
 @keyframes titleAnimation {
     from {
         transform: scale(1); 
+    }
+    to {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes title2Animation {
+    from {
+        transform: scale(1);
     }
     to {
         transform: scale(1.2);
