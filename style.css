@@ -55,6 +55,9 @@ body {
     display: none;
 }
 
+
+/* i dont know why, but i thought the keyframes had to go at the bottom of CSS. It does not. However, I like the organization of keeping them at the bottom */
+/* My Title Animation */
 @keyframes titleAnimation {
     from {
         transform: scale(1); 
@@ -64,6 +67,7 @@ body {
     }
 }
 
+/* My Game Over animation */
 @keyframes title2Animation {
     from {
         transform: scale(1);
