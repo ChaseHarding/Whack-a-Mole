@@ -9,12 +9,6 @@ body {
     background-color: lightblue;
 }
 
-.title {
-   font-size: 25px;
-   margin-bottom: 20px;
-   /* attempting to animate the title */
-   animation: titleAnimation 2s infinite alternate;
-}
 
 .gameOverTitle {
     display: none; 
@@ -26,25 +20,21 @@ body {
     /* i like this simple animation, but should explore alternatives */
 }
 
-/* have to rethink this  */
-/* #gameOverMessage {
-    
-    text-align: center;
-}
-
-#finalScore {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
+/* have to rethink this */
+#gameOverMessage {
+     display: none; /* hide the game over message initially */
+    text-align: center; 
+ } 
 
 #restartButton {
     font-size: 16px;
     padding: 8px 16px;
     cursor: pointer;
-} */
+    
+} 
 
 .score {
-   
+    display: none; /*hide score initially */
     text-align: center;
     font-size: 20px;
     margin-top: 20px;
@@ -84,15 +74,7 @@ body {
 
 
 /* i dont know why, but i thought the keyframes had to go at the bottom of CSS. It does not. However, I like the organization of keeping them at the bottom */
-/* My Title Animation */
-@keyframes titleAnimation {
-    from {
-        transform: scale(1); 
-    }
-    to {
-        transform: scale(1.2);
-    }
-}
+
 
 /* My Game Over animation */
 @keyframes title2Animation {

@@ -63,30 +63,32 @@ function endGame() {
   console.log("Game over!");
   timeUp = true;
 
-  // display our Game Over title
-  displayEndGameTitle();
+  let gameOverTitleElement = document.querySelector(".gameOverTitle");
+    let scoreElement = document.querySelector(".score");
+    let gameoverContainer = document.querySelector(".gameOverMessage")
+
+    gameOverTitleElement.style.display = "block";
+    scoreElement.style.display = "block";
+    gameoverContainer.style.display = "block";
+
 }
 
-function displayEndGameTitle() {
-    // grab that div
-    let endGameContainer = document.querySelector(".gameOverTitle");
-  
-    // display our Game Over div by changing the style
-    endGameContainer.style.display = "block";
-  }
-  
   //function for game start
   function startGame() {
     console.log("Game started!");
     //reset the score and game status
     score = 0;
     timeUp = false;
+    let gameoverContainer = document.querySelector(".gameOverMessage")
+
+    gameoverContainer.style.display = "none";
   
     //update the score display
     document.getElementById("score").textContent = score;
     //moles start appearing
     molePeek();
     console.log("Mole peeking");
+    
   
     //timeout to end game after certain amount
     setTimeout(endGame, 10000);
@@ -96,6 +98,8 @@ function displayEndGameTitle() {
     //LOL i thought my code wasnt working because the game wasnt restarting
     //in reality i never coded the game to do that
   }
+
+  document.getElementById("restartButton").addEventListener('click', startGame);
   
   //game start once page is loaded
   window.onload = startGame;

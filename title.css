@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* set direction to column so the div appear above eachother, took me a minute to remember this */
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: lightblue;
+}
+.title {
+    font-size: 25px;
+    margin-bottom: 20px;
+    /* attempting to animate the title */
+    animation: titleAnimation 2s infinite alternate;
+ }
+ /* Animation for Title */
+ @keyframes titleAnimation {
+    from {
+        transform: scale(1); 
+    }
+    to {
+        transform: scale(1.2);
+    }
+}
