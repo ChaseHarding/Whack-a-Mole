@@ -1,5 +1,5 @@
 const holes = document.querySelectorAll(".hole");
-
+let gameMusic;
 let score = 0;
 
 //function for random hole selection
@@ -76,6 +76,12 @@ function endGame() {
   //function for game start
   function startGame() {
     console.log("Game started!");
+    // adding game music
+    gameMusic = new Audio("./assets/audio/vodevil-15550.mp3");
+    gameMusic.loop = true;
+    gameMusic.play();
+
+
     //reset the score and game status
     score = 0;
     timeUp = false;
