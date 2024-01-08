@@ -6,13 +6,18 @@ body {
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-color: lightblue;
+    background-color: #FFB8D7;
 }
 .title {
     font-size: 25px;
     margin-bottom: 20px;
+    
     /* attempting to animate the title */
     animation: titleAnimation 2s infinite alternate;
+ }
+ h1 {
+    color: #3FAA48;
+    font-family: 'Comic Sans MS', cursive;
  }
  /* Animation for Title */
  @keyframes titleAnimation {
@@ -22,4 +27,47 @@ body {
     to {
         transform: scale(1.2);
     }
+}
+.allButtons{ 
+    
+    width: 200px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+#startButton {
+    padding: 15px;
+    margin: 5px 5px;
+    background: #5AC23D;
+    border-radius: 20px;
+    
+}
+#optionsButton {
+    padding: 15px;
+    margin: 5px 5px;
+    background: #5AC23D;
+    border-radius: 20px;
+}
+#exitButton {
+    padding: 15px;
+    margin: 5px 5px;
+    background: #5AC23D;
+    border-radius: 20px;
+}
+
+#startButton:hover {
+    background: #abff93;
+}
+#optionsButton:hover {
+    background: #abff93;
+}
+#exitButton:hover {
+    background: #abff93;
+}
+
+#musicIcon {
+    padding: 10px;
+    background: white;
+    
 }
