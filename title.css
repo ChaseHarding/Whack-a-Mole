@@ -6,54 +6,60 @@ body {
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-color: #FFB8D7;
+    /* background-color: #FFB8D7; */
+    background-image: url('./assets/images/TitleScreenBackground.PNG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 .title {
     font-size: 25px;
     margin-bottom: 20px;
+   
     
     /* attempting to animate the title */
-    animation: titleAnimation 2s infinite alternate;
+    animation: bounceIn 1.5s ease-out;
  }
  h1 {
-    color: #3FAA48;
+    color: white;
     font-family: 'Comic Sans MS', cursive;
+    color: #5AC23D
+    
  }
  /* Animation for Title */
- @keyframes titleAnimation {
-    from {
-        transform: scale(1); 
+ @keyframes bounceIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0; 
     }
-    to {
-        transform: scale(1.2);
+    60% {
+        transform: translateY(30px);
+        opacity: 0.8;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 .allButtons{ 
-    
-    width: 200px; 
+    height: 250px;
+    /* border: 1px solid red; */
+    width: 500px; 
     display: flex;
     flex-direction: column;
     align-items: center;
     
-}
-#startButton {
-    padding: 15px;
-    margin: 5px 5px;
-    background: #5AC23D;
-    border-radius: 20px;
     
 }
-#optionsButton {
+#startButton, #optionsButton, #exitButton {
+    gap: 30px;
     padding: 15px;
     margin: 5px 5px;
     background: #5AC23D;
     border-radius: 20px;
-}
-#exitButton {
-    padding: 15px;
-    margin: 5px 5px;
-    background: #5AC23D;
-    border-radius: 20px;
+    height: 100px;
+    
 }
 
 #startButton:hover {
