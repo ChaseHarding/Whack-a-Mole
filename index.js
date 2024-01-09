@@ -1,5 +1,6 @@
 const holes = document.querySelectorAll(".hole");
 let gameMusic;
+let isMusicPlaying = false;
 let score = 0;
 
 //function for random hole selection
@@ -11,8 +12,8 @@ function randomHole() {
 function molePeek() {
   //this should genereate a random time for the mole to pop up
   const time = Math.random() * 1000 + 500; //random timing
-//specifically multiplying it by 1000 gives me a value between 0 and 1000 and adding 500 ensures the number will be at least 500millseconds 
-// so between 0.5 and 1.5 seconds 
+  //specifically multiplying it by 1000 gives me a value between 0 and 1000 and adding 500 ensures the number will be at least 500millseconds
+  // so between 0.5 and 1.5 seconds
   const hole = randomHole();
   const moleImage = hole.querySelector("img"); //should put the mole image in the hole
   moleImage.style.display = "block"; //mole image should appear now when molepeek function runs
@@ -64,48 +65,59 @@ function endGame() {
   timeUp = true;
 
   let gameOverTitleElement = document.querySelector(".gameOverTitle");
-    let scoreElement = document.querySelector(".score");
-    let gameoverContainer = document.querySelector(".gameOverMessage")
+  let scoreElement = document.querySelector(".score");
+  let gameoverContainer = document.querySelector(".gameOverMessage");
 
-    gameOverTitleElement.style.display = "block";
-    scoreElement.style.display = "block";
-    gameoverContainer.style.display = "block";
-
+  gameOverTitleElement.style.display = "block";
+  scoreElement.style.display = "block";
+  gameoverContainer.style.display = "block";
 }
 
-  //function for game start
-  function startGame() {
-    console.log("Game started!");
-    // adding game music
-    gameMusic = new Audio("./assets/audio/vodevil-15550.mp3");
-    gameMusic.loop = true;
+function toggleMusic() {
+  if (isMusicPlaying) {
+    gameMusic.pause();
+    isMusicPlaying = false;
+  } else {
     gameMusic.play();
-
-
-    //reset the score and game status
-    score = 0;
-    timeUp = false;
-    let gameoverContainer = document.querySelector(".gameOverMessage")
-
-    gameoverContainer.style.display = "none";
-  
-    //update the score display
-    document.getElementById("score").textContent = score;
-    //moles start appearing
-    molePeek();
-    console.log("Mole peeking");
-    
-  
-    //timeout to end game after certain amount
-    setTimeout(endGame, 10000);
-    // calling the endGame function after the timeOut
-    // my mind is melting
-  
-    //LOL i thought my code wasnt working because the game wasnt restarting
-    //in reality i never coded the game to do that
+    isMusicPlaying = true;
   }
+}
+document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
 
-  document.getElementById("restartButton").addEventListener('click', startGame);
-  
-  //game start once page is loaded
-  window.onload = startGame;
+
+//function for game start
+function startGame() {
+  console.log("Game started!");
+  // adding game music
+  gameMusic = new Audio("./assets/audio/vodevil-15550.mp3");
+  gameMusic.loop = true;
+  gameMusic.play();
+
+  //reset the score and game status
+  score = 0;
+  timeUp = false;
+  let gameoverContainer = document.querySelector(".gameOverMessage");
+
+  gameoverContainer.style.display = "none";
+
+  //update the score display
+  document.getElementById("score").textContent = score;
+  //moles start appearing
+  molePeek();
+  console.log("Mole peeking");
+
+  //timeout to end game after certain amount
+  setTimeout(endGame, 10000);
+  // calling the endGame function after the timeOut
+  // my mind is melting
+
+  //LOL i thought my code wasnt working because the game wasnt restarting
+  //in reality i never coded the game to do that
+}
+
+document.getElementById("restartButton").addEventListener("click", startGame);
+
+//game start once page is loaded
+window.onload = startGame;
+
+
