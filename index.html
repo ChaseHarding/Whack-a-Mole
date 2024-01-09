@@ -9,13 +9,14 @@
   <body>
     <!-- Next step is to make the game over and score larger, and add a restart button -->
     <!-- gonna wrap the score and game over in a div i can target  -->
+    
     <div id="arcadeMachine" class="arcadeMachine">
       <div id="arcadeDisplay" class="arcadeDisplay">
         <div id="gameOverMessage" class="gameOverMessage">
           <div class="gameOverTitle">
             <h2>Game Over!</h2>
           </div>
-          <button id="restartButton">Restart Game</button>
+          
           <div class="score">Score <span id="score">0</span></div>
         </div>
         <div class="game-container">
@@ -46,10 +47,17 @@
 
         </div>
       </div>
+      <div class="controls">
+      <button id="goToTitleButton">Back to Home</button>
+      <button id="restartButton">Restart Game</button>
     </div>
+    <div class="musicButton">
     <button id="toggleMusicButton">
       <img id="musicIcon" src="./assets/images/MusicNote.PNG" alt="Music note">
       </button>
+    </div>
+    </div>
+    
     <script src="index.js"></script>
   </body>
 </html>

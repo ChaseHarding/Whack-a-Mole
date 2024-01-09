@@ -85,6 +85,12 @@ function toggleMusic() {
 document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
 
 
+function goToTitle() {
+  window.location.href = "title.html";
+} 
+
+document.getElementById("goToTitleButton").addEventListener('click', goToTitle);
+
 //function for game start
 function startGame() {
   console.log("Game started!");
