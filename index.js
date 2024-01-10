@@ -125,5 +125,3 @@ document.getElementById("restartButton").addEventListener("click", startGame);
 
 //game start once page is loaded
 window.onload = startGame;
-
-
