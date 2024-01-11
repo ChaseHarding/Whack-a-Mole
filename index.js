@@ -3,6 +3,19 @@ let gameMusic;
 let isMusicPlaying = false;
 let score = 0;
 
+//Need to make a 3rd html page for a loading screen
+//this will improve the ux/ui
+// loading page can perform necessary setup and loading before redirecting the player to the game
+
+// going to add to the goToTitle function to take the player to our new loading html
+// changing the event listener for our restartbutton 
+// write a function that runs the action of going to the loading page
+
+// new idea of adding a new function that 
+
+
+
+
 //function for random hole selection
 function randomHole() {
   const index = Math.floor(Math.random() * holes.length);
@@ -85,11 +98,24 @@ function toggleMusic() {
 document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
 
 
-function goToTitle() {
-  window.location.href = "title.html";
-} 
+// function goToTitle() {
+//   window.location.href = "title.html";
+// } 
 
-document.getElementById("goToTitleButton").addEventListener('click', goToTitle);
+
+function handleGoToTitleClick() {
+  if (!timeUp) {
+    goToLoading("title.html");
+  }
+}
+
+function handleRestartClick() {
+  if (!timeUp) {
+    goToLoading("index.html");
+  }
+}
+
+document.getElementById("goToTitleButton").addEventListener('click', handleGoToTitleClick);
 
 //function for game start
 function startGame() {
@@ -121,7 +147,12 @@ function startGame() {
   //in reality i never coded the game to do that
 }
 
-document.getElementById("restartButton").addEventListener("click", startGame);
+document.getElementById("restartButton").addEventListener("click", handleRestartClick);
+
+
+function goToLoading(destination) {
+  window.location.href = `loading.html?destination=${destination}`;
+}
 
 //game start once page is loaded
 window.onload = startGame;
