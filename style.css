@@ -120,7 +120,7 @@ body {
 .hole {
     width: 100px;
     height: 100px;
-    background-color: rgb(98, 58, 15);
+    background-color: #11372d;
     border-radius: 45px;
     margin: 20px;
     cursor: pointer;

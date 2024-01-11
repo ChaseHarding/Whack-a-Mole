@@ -40,7 +40,9 @@ function molePeek() {
 
 //function for whacking the mole
 function bonk(e) {
+  moleSqueak.play;
   if (!e.isTrusted) return;
+
 
   //originally without this code we could click the hole repeatedly and get infinite points
   //this will check if a mole is currently visible with the 'up' class
@@ -67,6 +69,12 @@ function bonk(e) {
 //event listeners for mouse clicking
 //even listener for all holes, calling that bonk function
 holes.forEach((hole) => hole.addEventListener("click", bonk));
+
+  //adding a squeak sound effect 
+  function moleSqueak() {
+  moleSqueak = new Audio("/assets/audio/mixkit-little-squeak-1018.wav");
+  moleSqueak.play;
+  }
 
 //timer for game to end
 // let timeUp = false;
@@ -101,18 +109,27 @@ document.getElementById("toggleMusicButton").addEventListener('click', toggleMus
 // function goToTitle() {
 //   window.location.href = "title.html";
 // } 
+// another great learning experience. i was looking for the timeUp to be false
+// but also wanted to have these event work when timeUp is true. took me a minute to realize
+// less is more and to achieve my outcome i need to just take out the if statement.
+// function handleGoToTitleClick() {
+//   if (!timeUp) {
+//     goToLoading("title.html");
+//   }
+// }
 
+// function handleRestartClick() {
+//   if (!timeUp) {
+//     goToLoading("index.html");
+//   }
+// }
 
 function handleGoToTitleClick() {
-  if (!timeUp) {
     goToLoading("title.html");
-  }
 }
 
 function handleRestartClick() {
-  if (!timeUp) {
     goToLoading("index.html");
-  }
 }
 
 document.getElementById("goToTitleButton").addEventListener('click', handleGoToTitleClick);

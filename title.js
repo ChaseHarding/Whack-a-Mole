@@ -31,6 +31,7 @@ function toggleMusic() {
     if (isMusicPlaying) {
         titleMusic.pause();
         isMusicPlaying = false;
+
      
     } else {
         titleMusic.play();
@@ -43,5 +44,6 @@ function toggleMusic() {
 document.getElementById("startButton").addEventListener("click", () => {
   window.location.href = "index.html";
 });
+
 
 window.onload = titleLoad;
