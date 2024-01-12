@@ -134,6 +134,52 @@ function handleRestartClick() {
 
 document.getElementById("goToTitleButton").addEventListener('click', handleGoToTitleClick);
 
+//timer logic.
+//ideally want this to run inside my startGame function, but before i do that i want to make a working product first
+// if all goes well, i can refactor into my startGame function
+// need a bar that starts at green and progressivly changes colors and looks as if depleting
+
+// its not perfect but its pretty close
+const timeBar = document.querySelector(".timer-bar");
+
+//logic for updating the visible color change based on timer
+function updateTimeBar(percent) {
+  timeBar.style.width = `${percent}%`;
+  //adjusting colors based on a timers value
+  if (percent > 70) {
+    timeBar.style.backgroundColor = 'green';
+  } else if (percent > 30) {
+    timeBar.style.backgroundColor = 'yellow';
+  } else {
+    timeBar.style.backgroundColor = 'red';
+  }
+}
+
+// logic to start the timer
+function startTimer(duration) {
+  let timeLeft = duration;
+  const interval = 100;
+
+  const timer = setInterval(function () {
+    const percent = (timeLeft / duration) * 100;
+    updateTimeBar(percent);
+
+    //if the timeLeft reaches OR goes below 0, timer is cleared, and the endGame function is called
+    if(timeLeft <= 0) {
+      clearInterval(timer);
+      //i thought setting the interval for the timer to 0 again would fix the delay
+      // updateTimeBar(0);
+      endGame();
+      // instead we'll call endGame function once the timer is up
+    }
+
+    timeLeft -= interval;
+  }, interval);
+
+}
+
+
+
 //function for game start
 function startGame() {
   console.log("Game started!");
@@ -156,9 +202,12 @@ function startGame() {
   console.log("Mole peeking");
 
   //timeout to end game after certain amount
-  setTimeout(endGame, 10000);
+  // setTimeout(endGame, 10000);
   // calling the endGame function after the timeOut
   // my mind is melting
+
+  //going to add another 10 seconds
+  startTimer(15000);
 
   //LOL i thought my code wasnt working because the game wasnt restarting
   //in reality i never coded the game to do that

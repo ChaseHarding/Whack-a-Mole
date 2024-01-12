@@ -10,6 +10,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    cursor: url('./assets/images/Hammer.PNG'), auto;
 }
 
 
@@ -29,6 +30,13 @@ body {
      display: none; /* hide the game over message initially */
     text-align: center; 
  } 
+
+.timer-bar {
+    height: 20px;
+    width: 100%;
+    background-color: green;
+    transition: width 1s linear;
+}
 
  .controls {
     display: flex;
@@ -117,19 +125,25 @@ body {
     display: flex;
 }
 
+
+
 .hole {
     width: 100px;
     height: 100px;
     background-color: #11372d;
     border-radius: 45px;
     margin: 20px;
-    cursor: pointer;
+    cursor: url('./assets/images/Hammer.PNG'), auto;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
 
+}
+
+.hole:hover {
+    cursor: url('./assets/images/Hammer.PNG'), auto;
 }
 
 .hole img {
