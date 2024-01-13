@@ -124,14 +124,14 @@ document.getElementById("toggleMusicButton").addEventListener('click', toggleMus
 
 
 // function goToTitle() {
-//   window.location.href = "index1.html";
+//   window.location.href = "index.html";
 // } 
 // another great learning experience. i was looking for the timeUp to be false
 // but also wanted to have these event work when timeUp is true. took me a minute to realize
 // less is more and to achieve my outcome i need to just take out the if statement.
 // function handleGoToTitleClick() {
 //   if (!timeUp) {
-//     goToLoading("index1.html");
+//     goToLoading("index.html");
 //   }
 // }
 
@@ -142,7 +142,7 @@ document.getElementById("toggleMusicButton").addEventListener('click', toggleMus
 // }
 
 function handleGoToTitleClick() {
-    goToLoading("index1.html");
+    goToLoading("index.html");
 }
 
 function handleRestartClick() {
