@@ -40,7 +40,7 @@ function molePeek() {
 
 //function for whacking the mole
 function bonk(e) {
-  moleSqueak.play;
+  moleSqueak();
   if (!e.isTrusted) return;
 
 
@@ -72,8 +72,9 @@ holes.forEach((hole) => hole.addEventListener("click", bonk));
 
   //adding a squeak sound effect 
   function moleSqueak() {
-  moleSqueak = new Audio("/assets/audio/mixkit-little-squeak-1018.wav");
-  moleSqueak.play;
+  let squeakSound = new Audio("/assets/audio/mixkit-little-squeak-1018.wav");
+  squeakSound.currentTime = 0; //set the current time to only the beginning second 
+  squeakSound.play();
   }
 
 //timer for game to end
@@ -95,14 +96,30 @@ function endGame() {
 }
 
 function toggleMusic() {
+const musicIcon = document.getElementById("musicIcon")
+
   if (isMusicPlaying) {
     gameMusic.pause();
     isMusicPlaying = false;
+
+    //please just display the music off icon
+    musicIcon.src = "./assets/images/MusicNoteOff.PNG";
+    
   } else {
     gameMusic.play();
     isMusicPlaying = true;
+   
+    // and now they should display my on or off image depending on if music is on or off
+    musicIcon.src = "./assets/images/MusicNote.PNG";
   }
 }
+
+//i have to set up the initial state of the music note
+function setupMusicIconImage() {
+  const musicIcon = document.getElementById("musicIcon");
+  musicIcon.alt = "Music Note"
+}
+
 document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
 
 
@@ -186,6 +203,23 @@ function startGame() {
   // adding game music
   gameMusic = new Audio("./assets/audio/vodevil-15550.mp3");
   gameMusic.loop = true;
+  gameMusic.volume = 0.2//setting default to something lower its too loud
+
+const volumeControl = document.createElement("input");
+volumeControl.type = "range"
+volumeControl.min = 0;
+volumeControl.max = 1;
+volumeControl.step = 0.1;
+volumeControl.value = 1;
+//styling 
+volumeControl.style.background = "linear-gradient(to right, blue, lightblue)"; //setting background color
+volumeControl.style.border = "1px solid blue";
+volumeControl.addEventListener('input', () => {
+  gameMusic.volume =volumeControl.value;
+});
+
+document.body.appendChild(volumeControl);
+
   gameMusic.play();
 
   //reset the score and game status
@@ -221,4 +255,7 @@ function goToLoading(destination) {
 }
 
 //game start once page is loaded
-window.onload = startGame;
+window.onload = () => {
+  setupMusicIconImage();
+  startGame();
+}
