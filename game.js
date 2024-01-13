@@ -72,7 +72,7 @@ holes.forEach((hole) => hole.addEventListener("click", bonk));
 
   //adding a squeak sound effect 
   function moleSqueak() {
-  let squeakSound = new Audio("/assets/audio/mixkit-little-squeak-1018.wav");
+  let squeakSound = new Audio("assets/audio/mixkit-little-squeak-1018.wav");
   squeakSound.currentTime = 0; //set the current time to only the beginning second 
   squeakSound.play();
   }
@@ -201,7 +201,7 @@ function startTimer(duration) {
 function startGame() {
   console.log("Game started!");
   // adding game music
-  gameMusic = new Audio("./assets/audio/vodevil-15550.mp3");
+  gameMusic = new Audio("assets/audio/vodevil-15550.mp3");
   gameMusic.loop = true;
   gameMusic.volume = 0.2//setting default to something lower its too loud
 
