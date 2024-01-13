@@ -72,7 +72,7 @@ holes.forEach((hole) => hole.addEventListener("click", bonk));
 
   //adding a squeak sound effect 
   function moleSqueak() {
-  let squeakSound = new Audio("assets/audio/mixkit-little-squeak-1018.wav");
+  let squeakSound = new Audio("./assets/audio/mixkit-little-squeak-1018.wav");
   squeakSound.currentTime = 0; //set the current time to only the beginning second 
   squeakSound.play();
   }
