@@ -28,17 +28,53 @@ function clickHandler() {
 }
 
 function toggleMusic() {
+  const musicIcon = document.getElementById("musicIcon")
+  
     if (isMusicPlaying) {
-        titleMusic.pause();
-        isMusicPlaying = false;
+      titleMusic.pause();
+      isMusicPlaying = false;
+  
+      //please just display the music off icon
+      musicIcon.src = "./assets/images/MusicNoteOff.PNG";
+      
+    } else {
+      titleMusic.play();
+      isMusicPlaying = true;
+     
+      // and now they should display my on or off image depending on if music is on or off
+      musicIcon.src = "./assets/images/MusicNote.PNG";
+    }
+  }
+  
+  //i have to set up the initial state of the music note
+  function setupMusicIconImage() {
+    const musicIcon = document.getElementById("musicIcon");
+    musicIcon.alt = "Music Note"
+  }
+  
+  document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
+
+// function toggleMusic() {
+//   const musicIcon = getElementById("musicNote");
+//     if (isMusicPlaying) {
+//         titleMusic.pause();
+//         isMusicPlaying = false;
+
+//         musicIcon.src = "assets/images/MusicNoteOff.PNG";
 
      
-    } else {
-        titleMusic.play();
-        isMusicPlaying = true;
+//     } else {
+//         titleMusic.play();
+//         isMusicPlaying = true;
         
-    }
-}
+//         musicIcon.src = "assets/images/MusicNote.PNG";
+//     }
+// }
+
+// function setupMusicIconImage() {
+//   const musicIcon = document.getElementById("musicIcon");
+//   musicIcon.alt = "Music Note"
+// }
 
 
 document.getElementById("startButton").addEventListener("click", () => {

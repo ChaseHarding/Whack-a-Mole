@@ -40,13 +40,16 @@ function molePeek() {
 
 //function for whacking the mole
 function bonk(e) {
-  moleSqueak();
+  //originally placed here, this allowed the user to click the hole and hear the squeak repeatedly 
+  // moleSqueak();
   if (!e.isTrusted) return;
 
 
   //originally without this code we could click the hole repeatedly and get infinite points
   //this will check if a mole is currently visible with the 'up' class
   if (this.classList.contains("up")) {
+    //now im checking for the up class given to our displayed moles
+    moleSqueak();
     //so mole clicked confirms that this works
     console.log("Mole clicked!");
     //score increase!!
