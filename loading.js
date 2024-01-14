@@ -9,7 +9,7 @@ function redirectToPage() {
     setTimeout(() => {
         // redirect to my destination
         window.location.href = destination;
-    }, 3000); //3 seconds
+    }, 8000); //8 seconds
 }
 
 // window.addEventListener()

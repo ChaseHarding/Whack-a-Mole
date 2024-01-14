@@ -49,3 +49,30 @@ body {
         transform: rotate(1turn);
     }
 }
+
+.loadingCard{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-content: center;
+    background-color: #2c3e50;
+    padding: 20px;
+    border-radius: 20px;
+    font-family: 'Acme', sans-serif;
+    margin: 20px;
+    text-align: center;
+}
+
+.loadingCard h2, .loadingCard h3, .loadingCard h4 {
+    margin-bottom: 10px;
+}
+.loadingCard p {
+    font-size: 1.5em;
+    line-height: 1.5;
+}
+.loadingCard img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
