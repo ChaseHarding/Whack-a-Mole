@@ -2,6 +2,8 @@ const holes = document.querySelectorAll(".hole");
 let gameMusic;
 let isMusicPlaying = false;
 let score = 0;
+const countdownNumberElement = document.getElementById("countdownNumber");
+const countdownBackgroundElement = document.getElementById("countdown");
 
 //Need to make a 3rd html page for a loading screen
 //this will improve the ux/ui
@@ -198,7 +200,29 @@ function startTimer(duration) {
 
 }
 
+function newGame() {
+  let countdownValue = 3;
 
+  //setting an interval to update the countdown every second
+  const countdownInterval = setInterval(() => {
+    countdownNumberElement.textContent = countdownValue;
+
+    //and decrease the time now
+    countdownValue--;
+
+    if(countdownValue < 0) {
+      clearInterval(countdownInterval);
+      startGame();
+//hide the element after countdown
+      countdownNumberElement.style.display = "none";
+      countdownBackgroundElement.style.display = "none";
+    }
+  }, 1000);
+  //timeout for 3 seconds then the game starts 
+  // setTimeout(() => {
+  //   startGame();
+  // }, 3000);
+}
 
 //function for game start
 function startGame() {
@@ -260,5 +284,5 @@ function goToLoading(destination) {
 //game start once page is loaded
 window.onload = () => {
   setupMusicIconImage();
-  startGame();
+  newGame();
 }
