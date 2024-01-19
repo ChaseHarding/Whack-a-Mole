@@ -200,9 +200,20 @@ function startTimer(duration) {
 
 }
 
+
 function newGame() {
   let countdownValue = 3;
 
+  //to display my start game message initially
+  const startGameMessage = document.getElementById("startGameMessage");
+  startGameMessage.style.display = "block";
+
+  //listener for the enter key to be pressed
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      //hide that
+      startGameMessage.style.display = "none";
+    
   //setting an interval to update the countdown every second
   const countdownInterval = setInterval(() => {
     countdownNumberElement.textContent = countdownValue;
@@ -218,11 +229,13 @@ function newGame() {
       countdownBackgroundElement.style.display = "none";
     }
   }, 1000);
+}
+});
+}
   //timeout for 3 seconds then the game starts 
   // setTimeout(() => {
   //   startGame();
   // }, 3000);
-}
 
 //function for game start
 function startGame() {

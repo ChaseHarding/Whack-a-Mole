@@ -56,6 +56,7 @@ body {
     width: 10em; */
     color: white;
     font-size: 16px;
+    font-family: 'Chakra Petch', sans-serif;
  }
 
  #goToTitleButton:hover {
@@ -71,12 +72,13 @@ body {
     /* border: 2px solid rgb(226, 82, 106); */
     border-radius: 25px;
     color: white;
+    font-family: 'Chakra Petch', sans-serif;
     
 } 
 
 #restartButton:hover {
     background: #f6df6c;    
-    color: black
+    color: black;
 }
 
 .musicButton {
@@ -126,6 +128,21 @@ body {
 }
 .row1, .row2 {
     display: flex;
+}
+
+.startGameMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: #fff;
+    font-family: 'Chakra Petch', sans-serif;
+    position: absolute;
+    z-index: 1;
+    background-color: orange;
+    border-radius: 15px;
+    padding: 10px;
+
 }
 
 .countdown {
