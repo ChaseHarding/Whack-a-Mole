@@ -8,6 +8,9 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
       </style>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital@1&display=swap');
+          </style>
   </head>
   <body>
     <div class="board">
@@ -16,7 +19,17 @@
       </div>
       <div class="allButtons">
         <button id="startButton">Start Game</button>
-        <button id="optionsButton">Options</button>
+        <!-- <button id="optionsButton">Options</button> -->
+        <button id="howToPlayButton">How To Play</button>
+        <div id="howToPlayBox" class="howToPlayBox">
+          <div class="closeButton" onclick="closeHowToPlayBox()">Close</div>
+          <h3>Welcome to Whack-a-Mole</h3>
+          <h4>How to Play:</h4>
+          <p>On the next screen, youll be asked to press enter, afterwards a short timer will run.
+            Once that timer finishes, you will have 10 seconds to whack as many moles as you can.
+            Don't worry, we've given you a hefty hammer to do so.
+          </p>
+        </div>
         <!-- not allowed -->
         <!-- <button id="exitButton">Exit Game</button> -->
       </div>

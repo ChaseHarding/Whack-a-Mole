@@ -76,6 +76,18 @@ function toggleMusic() {
 //   musicIcon.alt = "Music Note"
 // }
 
+document.getElementById("howToPlayButton").addEventListener("click", openHowToPlayBox);
+
+function openHowToPlayBox() {
+  const openHowToPlayBox = document.getElementById("howToPlayBox");
+  openHowToPlayBox.style.display = "block";
+}
+
+function closeHowToPlayBox() {
+  const howToPlayBox = document.getElementById("howToPlayBox");
+  howToPlayBox.style.display = "none";
+}
+
 
 document.getElementById("startButton").addEventListener("click", () => {
   window.location.href = "game.html";
