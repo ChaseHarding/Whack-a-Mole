@@ -5,23 +5,12 @@ let score = 0;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 
-//Need to make a 3rd html page for a loading screen
-//this will improve the ux/ui
-// loading page can perform necessary setup and loading before redirecting the player to the game
-
-// going to add to the goToTitle function to take the player to our new loading html
-// changing the event listener for our restartbutton 
-// write a function that runs the action of going to the loading page
-
-// new idea of adding a new function that 
-
-
-
+//GAME MECHANICS
 
 //function for random hole selection
 function randomHole() {
-  const index = Math.floor(Math.random() * holes.length);
-  return holes[index];
+  const index = Math.floor(Math.random() * holes.length); //this generates a number between 0 and the length of holes
+  return holes[index]; // this returns a a randomly generated value from the holes array
 }
 //function for making mole appear
 function molePeek() {
@@ -75,13 +64,7 @@ function bonk(e) {
 //even listener for all holes, calling that bonk function
 holes.forEach((hole) => hole.addEventListener("click", bonk));
 
-  //adding a squeak sound effect 
-  function moleSqueak() {
-  let squeakSound = new Audio("./assets/audio/mixkit-little-squeak-1018.wav");
-  squeakSound.currentTime = 0; //set the current time to only the beginning second 
-  squeakSound.play();
-  }
-
+ 
 //timer for game to end
 // let timeUp = false;
 // this is redudant, globally calling this var is not necessary
@@ -99,67 +82,6 @@ function endGame() {
   scoreElement.style.display = "block";
   gameoverContainer.style.display = "block";
 }
-
-function toggleMusic() {
-const musicIcon = document.getElementById("musicIcon")
-
-  if (isMusicPlaying) {
-    gameMusic.pause();
-    isMusicPlaying = false;
-
-    //please just display the music off icon
-    musicIcon.src = "./assets/images/MusicNoteOff.PNG";
-    
-  } else {
-    gameMusic.play();
-    isMusicPlaying = true;
-   
-    // and now they should display my on or off image depending on if music is on or off
-    musicIcon.src = "./assets/images/MusicNote.PNG";
-  }
-}
-
-//i have to set up the initial state of the music note
-function setupMusicIconImage() {
-  const musicIcon = document.getElementById("musicIcon");
-  musicIcon.alt = "Music Note"
-}
-
-document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
-
-
-// function goToTitle() {
-//   window.location.href = "index.html";
-// } 
-// another great learning experience. i was looking for the timeUp to be false
-// but also wanted to have these event work when timeUp is true. took me a minute to realize
-// less is more and to achieve my outcome i need to just take out the if statement.
-// function handleGoToTitleClick() {
-//   if (!timeUp) {
-//     goToLoading("index.html");
-//   }
-// }
-
-// function handleRestartClick() {
-//   if (!timeUp) {
-//     goToLoading("game.html");
-//   }
-// }
-
-function handleGoToTitleClick() {
-    goToLoading("index.html");
-}
-
-function handleRestartClick() {
-    goToLoading("game.html");
-}
-
-document.getElementById("goToTitleButton").addEventListener('click', handleGoToTitleClick);
-
-//timer logic.
-//ideally want this to run inside my startGame function, but before i do that i want to make a working product first
-// if all goes well, i can refactor into my startGame function
-// need a bar that starts at green and progressivly changes colors and looks as if depleting
 
 // its not perfect but its pretty close
 const timeBar = document.querySelector(".timer-bar");
@@ -232,10 +154,6 @@ function newGame() {
 }
 });
 }
-  //timeout for 3 seconds then the game starts 
-  // setTimeout(() => {
-  //   startGame();
-  // }, 3000);
 
 //function for game start
 function startGame() {
@@ -275,17 +193,58 @@ document.body.appendChild(volumeControl);
   molePeek();
   console.log("Mole peeking");
 
-  //timeout to end game after certain amount
-  // setTimeout(endGame, 10000);
-  // calling the endGame function after the timeOut
-  // my mind is melting
-
   //going to add another 10 seconds
   startTimer(15000);
 
-  //LOL i thought my code wasnt working because the game wasnt restarting
-  //in reality i never coded the game to do that
 }
+
+//MUSIC AND AUDIO
+
+ //adding a squeak sound effect 
+ function moleSqueak() {
+  let squeakSound = new Audio("./assets/audio/mixkit-little-squeak-1018.wav");
+  squeakSound.currentTime = 0; //set the current time to only the beginning second 
+  squeakSound.play();
+  }
+
+function toggleMusic() {
+const musicIcon = document.getElementById("musicIcon")
+
+  if (isMusicPlaying) {
+    gameMusic.pause();
+    isMusicPlaying = false;
+
+    //please just display the music off icon
+    musicIcon.src = "./assets/images/MusicNoteOff.PNG";
+    
+  } else {
+    gameMusic.play();
+    isMusicPlaying = true;
+   
+    // and now they should display my on or off image depending on if music is on or off
+    musicIcon.src = "./assets/images/MusicNote.PNG";
+  }
+}
+
+//i have to set up the initial state of the music note
+function setupMusicIconImage() {
+  const musicIcon = document.getElementById("musicIcon");
+  musicIcon.alt = "Music Note"
+}
+
+document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
+
+//NAVIGATION
+
+function handleGoToTitleClick() {
+  goToLoading("index.html");
+}
+
+function handleRestartClick() {
+  goToLoading("game.html");
+}
+
+document.getElementById("goToTitleButton").addEventListener('click', handleGoToTitleClick);
 
 document.getElementById("restartButton").addEventListener("click", handleRestartClick);
 
