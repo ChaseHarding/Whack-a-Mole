@@ -1,24 +1,25 @@
 # Whack-A-Mole
 Welcome to my take on a classic arcade game. This game features a dynamic and responsive design, with moles popping up randomly for users to quickly whack and score points.
 Through this project I demonstrated my skills in combining my background in digital design and artwork with these newly aquired web languages.
+
 ## How it was made:
 This project was crafted using a combination of HTML, CSS, and Javascript to achieve a seamless and immersive experience. 
 HTML provided the structure of my game, defining elements such as the game board, score display, and of course, the moles.
 CSS played a crucial role in enhancing my games visual appeal with animations and responsive design elements.
 The dynamic functionality of the game was created with Javascript. This is where i programmed logic for the moles to appear and dissappear after being whacked. 
 Event listeners were utilized to listen for user clicks and update the users score. 
-To enhance the gmaing experience, I incorporated audio elements. For the distinctive "mole squeek" I utilized an audio file adn triggered it dynamically during specific game events.
+To enhance the gmaing experience, I incorporated audio elements. For the distinctive "mole squeak" I utilized an audio file and triggered it dynamically during specific game events.
 As a digital artist i took a very hands on approach to this whack-a-mole by creating custom assets that contribute to the games unique visual identity. In addition to mole graphics, 
 I created captivating background images that adorn the game, setting the tone for the players experience. I designed Dingo, the games spirited mascot destined to be the players
-loyal companion--a spirited shiba ready to embark on thrilling mole-hunting adventured. Both the immersive backgrounds and lively mascot were brought to life through my artistic endeavors,
-aiming to elevate the overall aethetic and engagement of the gaming environment.
+loyal companion--a spirited shiba ready to embark on thrilling mole-hunting adventures. Both the immersive backgrounds and lively mascot were brought to life through my artistic endeavors,
+aiming to elevate the overall aesthetic and engagement of the gaming environment.
 
 ## Optimization
 In the optimzation phase, i focused on enhancing the games performancea and user experience. Through careful code refinement, I streamlined the javascript functions responsible for mole 
-generation, click detection, and score updates. Additionally, I implemented responsive desingn principles in CSS to gurantee optimal displayacross various devices. 
+generation, click detection, and score updates. Additionally, I implemented responsive design principles in CSS to gurantee optimal display across various devices. 
 
 ## Known Bugs
-1. Timer for game end can continue displaying a countdown animation after the game has ended for.
+1. Timer for game end can continue displaying a countdown animation after the game has ended.
 2. Possible to score a point if mole is still on screen while Game Over is displayed.
 
 ## Planned Updates
@@ -43,6 +44,7 @@ Key concepts:
 6. Asynchronous Programming: Use of setTimeout and SetInterval demonstrates a grasp of asynchronous programming crucial for managing time-based events in games.
 7. Function Modularity: Each function serves a specific purpose, contributing to overall readability and maintainability. Well-organzied into modular fucntions, promoting reusability and maintainability.
 8. Responsive Design: The inclusion of a volume control slider reflect an awareness of user experience and resposiveness. allowing players to adjust the games audio according to their preferences.
+   
 ## Credits
 Music by <a href="https://pixabay.com/users/sergequadrado-24990007/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=15550">Sergei Chetvertnykh</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=15550">Pixabay</a>
 
