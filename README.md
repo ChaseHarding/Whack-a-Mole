@@ -17,11 +17,11 @@ aiming to elevate the overall aethetic and engagement of the gaming environment.
 In the optimzation phase, i focused on enhancing the games performancea and user experience. Through careful code refinement, I streamlined the javascript functions responsible for mole 
 generation, click detection, and score updates. Additionally, I implemented responsive desingn principles in CSS to gurantee optimal displayacross various devices. 
 
-##Known Bugs
+## Known Bugs
 1. Timer for game end can continue displaying a countdown animation after the game has ended for.
 2. Possible to score a point if mole is still on screen while Game Over is displayed.
 
-##Planned Updates
+## Planned Updates
 1. Bug fixes for UX/UI
 2. Fully adjustable audio control settings
 3. Dingo, the loyal companion
