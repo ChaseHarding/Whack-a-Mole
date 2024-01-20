@@ -23,11 +23,12 @@ generation, click detection, and score updates. Additionally, I implemented resp
 
 ##Planned Updates
 1. Bug fixes for UX/UI
-2. Dingo, the loyal companion
-3. Mole diversity
-4. Bombs
-5. Animations for moles appearing and hammer whacking
-6. High Score systems with local storage 
+2. Fully adjustable audio control settings
+3. Dingo, the loyal companion
+4. Mole diversity
+5. Bombs
+6. Animations for moles appearing and hammer whacking
+7. High Score systems with local storage 
 
 
 ## Lessons Learned
@@ -45,7 +46,7 @@ Key concepts:
 ## Credits
 Music by <a href="https://pixabay.com/users/sergequadrado-24990007/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=15550">Sergei Chetvertnykh</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=15550">Pixabay</a>
 
-
+Sounds effects by <a href="https://mixkit.co/free-sound-effects/squeak/">Mixkit</a>
 
 Music by <a href="https://pixabay.com/users/xtremefreddy-32332307/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=146305">XtremeFreddy</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=146305">Pixabay</a>
 
