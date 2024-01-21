@@ -5,6 +5,13 @@ let score = 0;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 
+//testing out new branches
+//To do: 
+// 1. add user select: none in css to prevent user ability to highlight text
+// 2. overflow:hidden for an attribute in the holes so we can animate sliding in and keep mole image within holes
+// 3. add click event to animate a hammer rotation
+
+
 //GAME MECHANICS
 
 //function for random hole selection
