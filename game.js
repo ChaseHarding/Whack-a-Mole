@@ -4,6 +4,7 @@ let isMusicPlaying = false;
 let score = 0;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
+const cursor = document.querySelector(".cursor");
 
 //testing out new branches
 //To do: 
@@ -204,6 +205,17 @@ document.body.appendChild(volumeControl);
   startTimer(15000);
 
 }
+//mouse movement 
+window.addEventListener('mousemove', e => {
+  cursor.style.top = e.pageY + 'px';
+  cursor.style.left = e.pageX + 'px';
+})
+window.addEventListener('mousedown', () => {
+  cursor.classList.add('active');
+})
+window.addEventListener('mouseup', () => {
+  cursor.classList.remove('active');
+})
 
 //MUSIC AND AUDIO
 

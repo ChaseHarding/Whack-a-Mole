@@ -10,7 +10,24 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    cursor: url('./assets/images/Hammer.PNG'), auto;
+    cursor: none;
+   
+}
+.cursor {
+    height: 75px;
+    width: 70px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    background-image: url('assets/images/Hammer.PNG');
+    background-size: 100% 100%;
+    transform: translate(-20%, -20%);
+    transition: transform .1s;
+    pointer-events: none;
+}
+
+.cursor.active {
+    transform: translate(-20%, -20%) rotate(-45deg);
 }
 
 
@@ -182,7 +199,7 @@ body {
     background-color: #11372d;
     border-radius: 45px;
     margin: 20px;
-    cursor: url('./assets/images/Hammer.PNG'), auto;
+    /* cursor: url('./assets/images/Hammer.PNG'), auto; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,9 +208,9 @@ body {
 
 }
 
-.hole:hover {
+/* .hole:hover {
     cursor: url('./assets/images/Hammer.PNG'), auto;
-}
+} */
 
 .hole img {
     width: 100%;
