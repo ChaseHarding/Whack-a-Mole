@@ -87,10 +87,7 @@ body {
     background: #abff93;
     color: black;
 }
-/* #optionsButton:hover {
-    background: #abff93;
-    color: black;
-} */
+
 
 
 #howToPlayButton:hover {
@@ -121,14 +118,11 @@ body {
     font-weight: bold;
     font-size: 16px;
 }
-
-/* #exitButton:hover {
-    background: #abff93;
-    color: black;
-} */
 #toggleMusicButton {
     background: transparent;
     border: none;
+    width: 68px;
+    height: 68px;
 }
 #musicIcon {
     padding: 10px;
