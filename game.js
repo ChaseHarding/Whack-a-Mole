@@ -7,11 +7,10 @@ const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
 
 //testing out new branches
-//To do: 
+//To do:
 // 1. add user select: none in css to prevent user ability to highlight text
 // 2. overflow:hidden for an attribute in the holes so we can animate sliding in and keep mole image within holes
 // 3. add click event to animate a hammer rotation
-
 
 //GAME MECHANICS
 
@@ -29,9 +28,9 @@ function molePeek() {
   const hole = randomHole();
   const moleImage = hole.querySelector("img"); //should put the mole image in the hole
   moleImage.style.display = "block"; //mole image should appear now when molepeek function runs
-  hole.classList.add("up"); //adding 'up' to the hole to make the mole pop up
+  moleImage.classList.add("up"); //adding 'up' to the hole to make the mole pop up
   setTimeout(() => {
-    hole.classList.remove("up"); //timeout to make the mole disappear after a random time
+    moleImage.classList.remove("up"); //timeout to make the mole disappear after a random time
     moleImage.style.display = "none"; //mole should hide
     if (!timeUp) molePeek();
   }, time);
@@ -39,14 +38,15 @@ function molePeek() {
 
 //function for whacking the mole
 function bonk(e) {
-  //originally placed here, this allowed the user to click the hole and hear the squeak repeatedly 
+  //originally placed here, this allowed the user to click the hole and hear the squeak repeatedly
   // moleSqueak();
   if (!e.isTrusted) return;
 
+  const moleImage = this.querySelector("img");
 
   //originally without this code we could click the hole repeatedly and get infinite points
   //this will check if a mole is currently visible with the 'up' class
-  if (this.classList.contains("up")) {
+  if (moleImage.classList.contains("up") && !moleImage.classList.contains("clicked")) {
     //now im checking for the up class given to our displayed moles
     moleSqueak();
     //so mole clicked confirms that this works
@@ -57,13 +57,17 @@ function bonk(e) {
     //score update!!
     document.getElementById("score").textContent = score;
 
-    const moleImage = this.querySelector("img"); //grab the mole image
+  
     moleImage.style.display = "none"; //when the mole is hit it should disappear
     //omg the value should be a string, it was interepting it as a variable duh
 
     //now hide the mole after getting hit
     this.classList.remove("up");
+    moleImage.classList.add("clicked");
     console.log("Mole hidden!");
+    setTimeout(() => {
+      moleImage.classList.remove("clicked");
+    }, 1000);
     //console log is telling me that none is not defined
   }
 }
@@ -72,7 +76,6 @@ function bonk(e) {
 //even listener for all holes, calling that bonk function
 holes.forEach((hole) => hole.addEventListener("click", bonk));
 
- 
 //timer for game to end
 // let timeUp = false;
 // this is redudant, globally calling this var is not necessary
@@ -99,11 +102,11 @@ function updateTimeBar(percent) {
   timeBar.style.width = `${percent}%`;
   //adjusting colors based on a timers value
   if (percent > 70) {
-    timeBar.style.backgroundColor = 'green';
+    timeBar.style.backgroundColor = "green";
   } else if (percent > 30) {
-    timeBar.style.backgroundColor = 'yellow';
+    timeBar.style.backgroundColor = "yellow";
   } else {
-    timeBar.style.backgroundColor = 'red';
+    timeBar.style.backgroundColor = "red";
   }
 }
 
@@ -117,7 +120,7 @@ function startTimer(duration) {
     updateTimeBar(percent);
 
     //if the timeLeft reaches OR goes below 0, timer is cleared, and the endGame function is called
-    if(timeLeft <= 0) {
+    if (timeLeft <= 0) {
       clearInterval(timer);
       //i thought setting the interval for the timer to 0 again would fix the delay
       // updateTimeBar(0);
@@ -127,9 +130,7 @@ function startTimer(duration) {
 
     timeLeft -= interval;
   }, interval);
-
 }
-
 
 function newGame() {
   let countdownValue = 3;
@@ -140,29 +141,35 @@ function newGame() {
   startGameMessage.style.display = "block";
 
   //listener for the enter key to be pressed
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      //hide that
-      countDownDisplay.style.display = "flex";
-      startGameMessage.style.display = "none";
-    
-  //setting an interval to update the countdown every second
-  const countdownInterval = setInterval(() => {
-    countdownNumberElement.textContent = countdownValue;
+  const handleStart = () => {
+    //hide that
+    countDownDisplay.style.display = "flex";
+    startGameMessage.style.display = "none";
 
-    //and decrease the time now
-    countdownValue--;
+    //setting an interval to update the countdown every second
+    const countdownInterval = setInterval(() => {
+      countdownNumberElement.textContent = countdownValue;
 
-    if(countdownValue < 0) {
-      clearInterval(countdownInterval);
-      startGame();
-//hide the element after countdown
-      countdownNumberElement.style.display = "none";
-      countdownBackgroundElement.style.display = "none";
+      //and decrease the time now
+      countdownValue--;
+
+      if (countdownValue < 0) {
+        clearInterval(countdownInterval);
+        startGame();
+        //hide the element after countdown
+        countdownNumberElement.style.display = "none";
+        countdownBackgroundElement.style.display = "none";
+      }
+    }, 1000);
+  };
+  //listener for enter key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      handleStart();
     }
-  }, 1000);
-}
-});
+  });
+  //and listener for tap on mobile
+  document.addEventListener("touchstart", handleStart);
 }
 
 //function for game start
@@ -171,22 +178,22 @@ function startGame() {
   // adding game music
   gameMusic = new Audio("assets/audio/vodevil-15550.mp3");
   gameMusic.loop = true;
-  gameMusic.volume = 0.2//setting default to something lower its too loud
+  gameMusic.volume = 0.2; //setting default to something lower its too loud
 
-const volumeControl = document.createElement("input");
-volumeControl.type = "range"
-volumeControl.min = 0;
-volumeControl.max = 1;
-volumeControl.step = 0.1;
-volumeControl.value = 1;
-//styling 
-volumeControl.style.background = "linear-gradient(to right, blue, lightblue)"; //setting background color
-volumeControl.style.border = "1px solid blue";
-volumeControl.addEventListener('input', () => {
-  gameMusic.volume =volumeControl.value;
-});
+  const volumeControl = document.createElement("input");
+  volumeControl.type = "range";
+  volumeControl.min = 0;
+  volumeControl.max = 1;
+  volumeControl.step = 0.1;
+  volumeControl.value = 1;
+  //styling
+  volumeControl.style.background = "linear-gradient(to right, blue, lightblue)"; //setting background color
+  volumeControl.style.border = "1px solid blue";
+  volumeControl.addEventListener("input", () => {
+    gameMusic.volume = volumeControl.value;
+  });
 
-document.body.appendChild(volumeControl);
+  document.body.appendChild(volumeControl);
 
   gameMusic.play();
 
@@ -205,31 +212,30 @@ document.body.appendChild(volumeControl);
 
   //going to add another 10 seconds
   startTimer(15000);
-
 }
-//mouse movement 
-window.addEventListener('mousemove', e => {
-  cursor.style.top = e.pageY + 'px';
-  cursor.style.left = e.pageX + 'px';
-})
-window.addEventListener('mousedown', () => {
-  cursor.classList.add('active');
-})
-window.addEventListener('mouseup', () => {
-  cursor.classList.remove('active');
-})
+//mouse movement
+window.addEventListener("mousemove", (e) => {
+  cursor.style.top = e.pageY + "px";
+  cursor.style.left = e.pageX + "px";
+});
+window.addEventListener("mousedown", () => {
+  cursor.classList.add("active");
+});
+window.addEventListener("mouseup", () => {
+  cursor.classList.remove("active");
+});
 
 //MUSIC AND AUDIO
 
- //adding a squeak sound effect 
- function moleSqueak() {
+//adding a squeak sound effect
+function moleSqueak() {
   let squeakSound = new Audio("./assets/audio/mixkit-little-squeak-1018.wav");
-  squeakSound.currentTime = 0; //set the current time to only the beginning second 
+  squeakSound.currentTime = 0; //set the current time to only the beginning second
   squeakSound.play();
-  }
+}
 
 function toggleMusic() {
-const musicIcon = document.getElementById("musicIcon")
+  const musicIcon = document.getElementById("musicIcon");
 
   if (isMusicPlaying) {
     gameMusic.pause();
@@ -237,11 +243,10 @@ const musicIcon = document.getElementById("musicIcon")
 
     //please just display the music off icon
     musicIcon.src = "./assets/images/MusicNoteOff.PNG";
-    
   } else {
     gameMusic.play();
     isMusicPlaying = true;
-   
+
     // and now they should display my on or off image depending on if music is on or off
     musicIcon.src = "./assets/images/MusicNote.PNG";
   }
@@ -250,10 +255,12 @@ const musicIcon = document.getElementById("musicIcon")
 //i have to set up the initial state of the music note
 function setupMusicIconImage() {
   const musicIcon = document.getElementById("musicIcon");
-  musicIcon.alt = "Music Note"
+  musicIcon.alt = "Music Note";
 }
 
-document.getElementById("toggleMusicButton").addEventListener('click', toggleMusic);
+document
+  .getElementById("toggleMusicButton")
+  .addEventListener("click", toggleMusic);
 
 //NAVIGATION
 
@@ -265,10 +272,13 @@ function handleRestartClick() {
   goToLoading("game.html");
 }
 
-document.getElementById("goToTitleButton").addEventListener('click', handleGoToTitleClick);
+document
+  .getElementById("goToTitleButton")
+  .addEventListener("click", handleGoToTitleClick);
 
-document.getElementById("restartButton").addEventListener("click", handleRestartClick);
-
+document
+  .getElementById("restartButton")
+  .addEventListener("click", handleRestartClick);
 
 function goToLoading(destination) {
   window.location.href = `loading.html?destination=${destination}`;
@@ -278,4 +288,4 @@ function goToLoading(destination) {
 window.onload = () => {
   setupMusicIconImage();
   newGame();
-}
+};

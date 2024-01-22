@@ -173,7 +173,18 @@ body {
     text-align: center;
  }
 
+.up {
+    animation: slideUp 0.5s ease-out;
+}
 
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
 
 .hole {
     width: 100px;
@@ -181,7 +192,6 @@ body {
     background-color: #11372d;
     border-radius: 45px;
     margin: 20px;
-    /* cursor: url('./assets/images/Hammer.PNG'), auto; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,10 +199,6 @@ body {
     overflow: hidden;
 
 }
-
-/* .hole:hover {
-    cursor: url('./assets/images/Hammer.PNG'), auto;
-} */
 
 .hole img {
     width: 100%;
@@ -202,10 +208,6 @@ body {
     left: 0;
     display: none;
 }
-
-
-/* i dont know why, but i thought the keyframes had to go at the bottom of CSS. It does not. However, I like the organization of keeping them at the bottom */
-
 
 /* My Game Over animation */
 @keyframes title2Animation {
