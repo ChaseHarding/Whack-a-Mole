@@ -136,12 +136,14 @@ function newGame() {
 
   //to display my start game message initially
   const startGameMessage = document.getElementById("startGameMessage");
+  const countDownDisplay = document.querySelector(".countdown");
   startGameMessage.style.display = "block";
 
   //listener for the enter key to be pressed
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       //hide that
+      countDownDisplay.style.display = "flex";
       startGameMessage.style.display = "none";
     
   //setting an interval to update the countdown every second
