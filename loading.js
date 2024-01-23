@@ -12,6 +12,4 @@ function redirectToPage() {
     }, 4000); //4 seconds
 }
 
-// window.addEventListener()
-// calling it on page load
 window.onload = redirectToPage;

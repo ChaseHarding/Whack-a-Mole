@@ -6,12 +6,6 @@ const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
 
-//testing out new branches
-//To do:
-// 1. add user select: none in css to prevent user ability to highlight text
-// 2. overflow:hidden for an attribute in the holes so we can animate sliding in and keep mole image within holes
-// 3. add click event to animate a hammer rotation
-
 //GAME MECHANICS
 
 //function for random hole selection
@@ -38,15 +32,15 @@ function molePeek() {
 
 //function for whacking the mole
 function bonk(e) {
-  //originally placed here, this allowed the user to click the hole and hear the squeak repeatedly
-  // moleSqueak();
   if (!e.isTrusted) return;
 
   const moleImage = this.querySelector("img");
 
-  //originally without this code we could click the hole repeatedly and get infinite points
   //this will check if a mole is currently visible with the 'up' class
-  if (moleImage.classList.contains("up") && !moleImage.classList.contains("clicked")) {
+  if (
+    moleImage.classList.contains("up") &&
+    !moleImage.classList.contains("clicked")
+  ) {
     //now im checking for the up class given to our displayed moles
     moleSqueak();
     //so mole clicked confirms that this works
@@ -57,9 +51,7 @@ function bonk(e) {
     //score update!!
     document.getElementById("score").textContent = score;
 
-  
     moleImage.style.display = "none"; //when the mole is hit it should disappear
-    //omg the value should be a string, it was interepting it as a variable duh
 
     //now hide the mole after getting hit
     this.classList.remove("up");
@@ -68,17 +60,10 @@ function bonk(e) {
     setTimeout(() => {
       moleImage.classList.remove("clicked");
     }, 1000);
-    //console log is telling me that none is not defined
   }
 }
-
-//event listeners for mouse clicking
 //even listener for all holes, calling that bonk function
 holes.forEach((hole) => hole.addEventListener("click", bonk));
-
-//timer for game to end
-// let timeUp = false;
-// this is redudant, globally calling this var is not necessary
 
 // lets simplify the code
 function endGame() {
@@ -122,10 +107,7 @@ function startTimer(duration) {
     //if the timeLeft reaches OR goes below 0, timer is cleared, and the endGame function is called
     if (timeLeft <= 0) {
       clearInterval(timer);
-      //i thought setting the interval for the timer to 0 again would fix the delay
-      // updateTimeBar(0);
       endGame();
-      // instead we'll call endGame function once the timer is up
     }
 
     timeLeft -= interval;
@@ -168,8 +150,6 @@ function newGame() {
       handleStart();
     }
   });
-  //and listener for tap on mobile
-  // document.addEventListener("touchstart", handleStart);
 }
 
 //function for game start
@@ -241,7 +221,6 @@ function toggleMusic() {
     gameMusic.pause();
     isMusicPlaying = false;
 
-    //please just display the music off icon
     musicIcon.src = "./assets/images/MusicNoteOff.PNG";
   } else {
     gameMusic.play();
