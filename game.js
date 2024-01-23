@@ -169,7 +169,7 @@ function newGame() {
     }
   });
   //and listener for tap on mobile
-  document.addEventListener("touchstart", handleStart);
+  // document.addEventListener("touchstart", handleStart);
 }
 
 //function for game start
