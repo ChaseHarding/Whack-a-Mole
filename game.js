@@ -1,12 +1,50 @@
-const holes = document.querySelectorAll(".hole");
+let holes = [];
 let gameMusic;
 let isMusicPlaying = false;
 let score = 0;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
+const numberOfHoles = 3;
+
+//alright some notes for myself
+//shibas are spawning, moles are not
+//bonk does not work on shibas
+//modified the game mechanics for generating hole creation, character spawning, and bonk for score updates
 
 //GAME MECHANICS
+
+
+//function for dynamically making the holes
+function createHole() {
+  const hole = document.createElement('div');
+  hole.classList = 'hole';
+
+  const randomNumber = Math.random();
+  if(randomNumber < 0.5) {
+    hole.classList.add('mole');
+  } else if (randomNumber < 0.8) {
+    hole.classList.add('shiba');
+  }
+
+  return hole;
+}
+
+
+// function for creating holes in a row
+function createHolesInRow(rowClass) {
+  const row = document.querySelector(`.${rowClass}`);
+  for (let i = 0; i < numberOfHoles; i++) {
+    const hole = createHole();
+    row.appendChild(hole);
+    holes.push(hole);
+  }
+}
+
+//function for each row
+createHolesInRow('row1');
+createHolesInRow('row2');
+createHolesInRow('row3');
 
 //function for random hole selection
 function randomHole() {
@@ -14,39 +52,54 @@ function randomHole() {
   return holes[index]; // this returns a a randomly generated value from the holes array
 }
 //function for making mole appear
-function molePeek() {
-  //this should genereate a random time for the mole to pop up
+function peek(elementClass) {
+  //this should genereate a random time for the mole or shiba to pop up
   const time = Math.random() * 1000 + 500; //random timing
   //specifically multiplying it by 1000 gives me a value between 0 and 1000 and adding 500 ensures the number will be at least 500millseconds
   // so between 0.5 and 1.5 seconds
   const hole = randomHole();
-  const moleImage = hole.querySelector("img"); //should put the mole image in the hole
-  moleImage.style.display = "block"; //mole image should appear now when molepeek function runs
-  moleImage.classList.add("up"); //adding 'up' to the hole to make the mole pop up
+  const element = document.createElement("img"); //put either image needed
+
+  element.src = (elementClass === 'mole') ? 'assets/mole-transparent-bg-asset.png' : 'assets/images/Shiba.PNG';
+  element.alt = (elementClass === 'mole') ? 'Mole' : 'Shiba'
+  element.classList.add(elementClass);
+
+hole.appendChild(element);
+
+  element.style.display = "block"; //character image should appear now whenpeek function runs
+  element.classList.add("up"); //adding 'up' to the hole to make the mole pop up
   setTimeout(() => {
-    moleImage.classList.remove("up"); //timeout to make the mole disappear after a random time
-    moleImage.style.display = "none"; //mole should hide
-    if (!timeUp) molePeek();
+    element.classList.remove("up"); //timeout to make the character disappear after a random time
+    element.style.display = "none"; //character should hide
+    if (!timeUp) peek(elementClass);
   }, time);
 }
 
+// to make mole appear peek('mole');
+//to make shiba appear peek('shiba');
+
 //function for whacking the mole
-function bonk(e) {
+function bonk(elementClass) {
+  return function (e) {
   if (!e.isTrusted) return;
 
-  const moleImage = this.querySelector("img");
+  const element = this.querySelector("img");
 
   //this will check if a mole is currently visible with the 'up' class
   if (
-    moleImage.classList.contains("up") &&
-    !moleImage.classList.contains("clicked")
+    element.classList.contains("up") &&
+    !element.classList.contains("clicked")
   ) {
-    //now im checking for the up class given to our displayed moles
+    if(elementClass === "mole") {
     moleSqueak();
     //so mole clicked confirms that this works
     console.log("Mole clicked!");
     //score increase!!
     score++;
+    }else if (elementClass === "shiba") {
+      console.log("Shiba clicked!");
+      score--;
+    }
 
     //score update!!
     document.getElementById("score").textContent = score;
@@ -61,6 +114,7 @@ function bonk(e) {
       moleImage.classList.remove("clicked");
     }, 1000);
   }
+};
 }
 //even listener for all holes, calling that bonk function
 holes.forEach((hole) => hole.addEventListener("click", bonk));
@@ -187,8 +241,8 @@ function startGame() {
   //update the score display
   document.getElementById("score").textContent = score;
   //moles start appearing
-  molePeek();
-  console.log("Mole peeking");
+  peek();
+  console.log("peeking");
 
   //going to add another 10 seconds
   startTimer(15000);
