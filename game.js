@@ -8,11 +8,6 @@ const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
 
 
-//alright some notes for myself
-//shibas are spawning, moles are not
-//bonk does not work on shibas
-//modified the game mechanics for generating hole creation, character spawning, and bonk for score updates
-
 //GAME MECHANICS
 
 function setGame() {
@@ -25,7 +20,7 @@ function setGame() {
   }
 
   setInterval(setMole, 1000); //every 1 second we set a mole
-  setInterval(setShiba, 2000) //every 2 seconds we set a shiba
+  setInterval(setShiba, 2500) //every 2.5 seconds we set a shiba
 }
 
 function getRandomTile() {
@@ -44,8 +39,12 @@ function setMole() {
   let mole = document.createElement('img');
   mole.src = 'assets/mole-transparent-bg-asset.png';
   mole.alt = 'Mole';
+  console.log('Mole spawned')
 
   let num = getRandomTile();
+  if(currShibaTile && currShibaTile.id == num) {
+    return;
+  }
   currMoleTile = document.getElementById(num);
   currMoleTile.appendChild(mole);
 }
@@ -59,8 +58,12 @@ function setShiba() {
   let shiba = document.createElement('img');
   shiba.src = 'assets/images/Shiba.PNG';
   shiba.alt = "Shiba";
+  console.log('Shiba spawned')
 
   let num = getRandomTile();
+  if(currMoleTile && currMoleTile.id == num) {
+    return;
+  }
   currShibaTile = document.getElementById(num);
   currShibaTile.appendChild(shiba);
 
