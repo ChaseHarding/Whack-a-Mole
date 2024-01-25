@@ -1,11 +1,12 @@
-let holes = [];
+let currMoleTile;
+let currShibaTile;
 let gameMusic;
 let isMusicPlaying = false;
 let score = 0;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
-const numberOfHoles = 3;
+
 
 //alright some notes for myself
 //shibas are spawning, moles are not
@@ -14,112 +15,41 @@ const numberOfHoles = 3;
 
 //GAME MECHANICS
 
-
-//function for dynamically making the holes
-function createHole() {
-  const hole = document.createElement('div');
-  hole.classList = 'hole';
-
-  const randomNumber = Math.random();
-  if(randomNumber < 0.5) {
-    hole.classList.add('mole');
-  } else if (randomNumber < 0.8) {
-    hole.classList.add('shiba');
+function setGame() {
+  //setting up a grid
+  for (let i = 0; i < 9; i++) { //i starts at 0, continues to 8, stops at 9.
+    // so we'll have 9 holes insides individual divs with appropriate ids
+    let tile = document.createElement("div");
+    tile.id = i.toString();
+    document.getElementById("board").appendChild(tile);
   }
 
-  return hole;
+  setInterval(setMole, 1000); //every 2 seconds we set a mole
 }
 
+function getRandomTile() {
+  // Math.random --> (0-1) * 9 = (0-9) --> round down to (0-8) integers
+  let num = Math.floor(Math.random() * 9);
+  // set number to string so we can set to id
+  return num.toString();
+}
 
-// function for creating holes in a row
-function createHolesInRow(rowClass) {
-  const row = document.querySelector(`.${rowClass}`);
-  for (let i = 0; i < numberOfHoles; i++) {
-    const hole = createHole();
-    row.appendChild(hole);
-    holes.push(hole);
+function setMole() {
+
+  if (currMoleTile) {
+    currMoleTile.innerHTML = "";
   }
+
+  let mole = document.createElement('img');
+  mole.src = 'assets/mole-transparent-bg-asset.png';
+  mole.alt = 'Mole';
+
+  let num = getRandomTile();
+  currMoleTile = document.getElementById(num);
+  currMoleTile.appendChild(mole);
 }
 
-//function for each row
-createHolesInRow('row1');
-createHolesInRow('row2');
-createHolesInRow('row3');
-
-//function for random hole selection
-function randomHole() {
-  const index = Math.floor(Math.random() * holes.length); //this generates a number between 0 and the length of holes
-  return holes[index]; // this returns a a randomly generated value from the holes array
-}
-//function for making mole appear
-function peek(elementClass) {
-  //this should genereate a random time for the mole or shiba to pop up
-  const time = Math.random() * 1000 + 500; //random timing
-  //specifically multiplying it by 1000 gives me a value between 0 and 1000 and adding 500 ensures the number will be at least 500millseconds
-  // so between 0.5 and 1.5 seconds
-  const hole = randomHole();
-  const element = document.createElement("img"); //put either image needed
-
-  element.src = (elementClass === 'mole') ? 'assets/mole-transparent-bg-asset.png' : 'assets/images/Shiba.PNG';
-  element.alt = (elementClass === 'mole') ? 'Mole' : 'Shiba'
-  element.classList.add(elementClass);
-
-hole.appendChild(element);
-
-  element.style.display = "block"; //character image should appear now whenpeek function runs
-  element.classList.add("up"); //adding 'up' to the hole to make the mole pop up
-  setTimeout(() => {
-    element.classList.remove("up"); //timeout to make the character disappear after a random time
-    element.style.display = "none"; //character should hide
-    if (!timeUp) peek(elementClass);
-  }, time);
-}
-
-// to make mole appear peek('mole');
-//to make shiba appear peek('shiba');
-
-//function for whacking the mole
-function bonk(elementClass) {
-  return function (e) {
-  if (!e.isTrusted) return;
-
-  const element = this.querySelector("img");
-
-  //this will check if a mole is currently visible with the 'up' class
-  if (
-    element.classList.contains("up") &&
-    !element.classList.contains("clicked")
-  ) {
-    if(elementClass === "mole") {
-    moleSqueak();
-    //so mole clicked confirms that this works
-    console.log("Mole clicked!");
-    //score increase!!
-    score++;
-    }else if (elementClass === "shiba") {
-      console.log("Shiba clicked!");
-      score--;
-    }
-
-    //score update!!
-    document.getElementById("score").textContent = score;
-
-    moleImage.style.display = "none"; //when the mole is hit it should disappear
-
-    //now hide the mole after getting hit
-    this.classList.remove("up");
-    moleImage.classList.add("clicked");
-    console.log("Mole hidden!");
-    setTimeout(() => {
-      moleImage.classList.remove("clicked");
-    }, 1000);
-  }
-};
-}
-//even listener for all holes, calling that bonk function
-holes.forEach((hole) => hole.addEventListener("click", bonk));
-
-// lets simplify the code
+// function for End Game
 function endGame() {
   console.log("Game over!");
   timeUp = true;
@@ -320,5 +250,7 @@ function goToLoading(destination) {
 //game start once page is loaded
 window.onload = () => {
   setupMusicIconImage();
+  setGame();
   newGame();
+  
 };

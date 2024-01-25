@@ -178,28 +178,29 @@ body {
     }
 }
 
-.hole {
-    width: 100px;
-    height: 100px;
-    background-color: #11372d;
-    border-radius: 45px;
-    margin: 20px;
+#board {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-
+    flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
-.hole img {
+#board div {
+    height: calc(33.33% - 10px);
+    width: calc(33.33% - 10px);
+    background-color: #11372d;
+    border-radius: 100px;
+    background-size: cover;
+    margin: 5px;
+}
+
+#board div img {
     width: 100%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
+    height: 100%;
 }
+
 
 /* My Game Over animation */
 @keyframes title2Animation {
