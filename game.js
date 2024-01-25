@@ -24,7 +24,8 @@ function setGame() {
     document.getElementById("board").appendChild(tile);
   }
 
-  setInterval(setMole, 1000); //every 2 seconds we set a mole
+  setInterval(setMole, 1000); //every 1 second we set a mole
+  setInterval(setShiba, 2000) //every 2 seconds we set a shiba
 }
 
 function getRandomTile() {
@@ -47,6 +48,22 @@ function setMole() {
   let num = getRandomTile();
   currMoleTile = document.getElementById(num);
   currMoleTile.appendChild(mole);
+}
+
+function setShiba() {
+
+  if (currShibaTile) {
+    currShibaTile.innerHTML = "";
+  }
+
+  let shiba = document.createElement('img');
+  shiba.src = 'assets/images/Shiba.PNG';
+  shiba.alt = "Shiba";
+
+  let num = getRandomTile();
+  currShibaTile = document.getElementById(num);
+  currShibaTile.appendChild(shiba);
+
 }
 
 // function for End Game
