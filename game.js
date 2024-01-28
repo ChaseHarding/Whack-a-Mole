@@ -1,5 +1,5 @@
 let currMoleTile;
-let currShibaTile;
+let currBombTile;
 let gameMusic;
 let isMusicPlaying = false;
 let score = 0;
@@ -16,11 +16,12 @@ function setGame() {
     // so we'll have 9 holes insides individual divs with appropriate ids
     let tile = document.createElement("div");
     tile.id = i.toString();
+    tile.addEventListener('click', bonk);
     document.getElementById("board").appendChild(tile);
   }
 
   setInterval(setMole, 1000); //every 1 second we set a mole
-  setInterval(setShiba, 2500) //every 2.5 seconds we set a shiba
+  setInterval(setBomb, 2500) //every 2.5 seconds we set a bomb
 }
 
 function getRandomTile() {
@@ -42,31 +43,55 @@ function setMole() {
   console.log('Mole spawned')
 
   let num = getRandomTile();
-  if(currShibaTile && currShibaTile.id == num) {
+  if(currBombTile && currBombTile.id == num) {
     return;
   }
   currMoleTile = document.getElementById(num);
   currMoleTile.appendChild(mole);
 }
 
-function setShiba() {
+function setBomb() {
 
-  if (currShibaTile) {
-    currShibaTile.innerHTML = "";
+  if (currBombTile) {
+    currBombTile.innerHTML = "";
   }
 
-  let shiba = document.createElement('img');
-  shiba.src = 'assets/images/Shiba.PNG';
-  shiba.alt = "Shiba";
-  console.log('Shiba spawned')
+  let bomb = document.createElement('img');
+  bomb.src = 'assets/images/bomb.PNG';
+  bomb.alt = "Bomb";
+  console.log('Bomb spawned')
 
   let num = getRandomTile();
   if(currMoleTile && currMoleTile.id == num) {
     return;
   }
-  currShibaTile = document.getElementById(num);
-  currShibaTile.appendChild(shiba);
+  currBombTile = document.getElementById(num);
+  currBombTile.appendChild(bomb);
 
+}
+
+function bonk() {
+
+  if (this == currMoleTile) {
+    score += 10;
+    bonkSound = new Audio("assets/audio/mixkit-little-squeak-1018.wav");
+    currMoleTile.innerHTML = ""; //hide image
+   
+  } else if (this == currBombTile) {
+    score -= 10;
+    // bonkSound = new Audio("assets/audio/small-dog-barking-84707.mp3");
+    currBombTile.innerHTML = "";
+  
+  }
+
+  //playing the bonk sound
+  if (bonkSound) {
+    bonkSound.currentTime = 0;
+    bonkSound.play();
+
+    //update score display
+    document.getElementById('score').innerHTML = score.toString();
+  }
 }
 
 // function for End Game
@@ -75,11 +100,9 @@ function endGame() {
   timeUp = true;
 
   let gameOverTitleElement = document.querySelector(".gameOverTitle");
-  let scoreElement = document.querySelector(".score");
   let gameoverContainer = document.querySelector(".gameOverMessage");
 
   gameOverTitleElement.style.display = "block";
-  scoreElement.style.display = "block";
   gameoverContainer.style.display = "block";
 }
 
@@ -141,6 +164,7 @@ function newGame() {
 
       if (countdownValue < 0) {
         clearInterval(countdownInterval);
+        setGame();
         startGame();
         //hide the element after countdown
         countdownNumberElement.style.display = "none";
@@ -163,38 +187,13 @@ function startGame() {
   gameMusic = new Audio("assets/audio/vodevil-15550.mp3");
   gameMusic.loop = true;
   gameMusic.volume = 0.2; //setting default to something lower its too loud
-
-  const volumeControl = document.createElement("input");
-  volumeControl.type = "range";
-  volumeControl.min = 0;
-  volumeControl.max = 1;
-  volumeControl.step = 0.1;
-  volumeControl.value = 1;
-  //styling
-  volumeControl.style.background = "linear-gradient(to right, blue, lightblue)"; //setting background color
-  volumeControl.style.border = "1px solid blue";
-  volumeControl.addEventListener("input", () => {
-    gameMusic.volume = volumeControl.value;
-  });
-
-  document.body.appendChild(volumeControl);
-
   gameMusic.play();
-
   //reset the score and game status
   score = 0;
   timeUp = false;
   let gameoverContainer = document.querySelector(".gameOverMessage");
 
   gameoverContainer.style.display = "none";
-
-  //update the score display
-  document.getElementById("score").textContent = score;
-  //moles start appearing
-  peek();
-  console.log("peeking");
-
-  //going to add another 10 seconds
   startTimer(15000);
 }
 //mouse movement
@@ -217,33 +216,6 @@ function moleSqueak() {
   squeakSound.currentTime = 0; //set the current time to only the beginning second
   squeakSound.play();
 }
-
-function toggleMusic() {
-  const musicIcon = document.getElementById("musicIcon");
-
-  if (isMusicPlaying) {
-    gameMusic.pause();
-    isMusicPlaying = false;
-
-    musicIcon.src = "./assets/images/MusicNoteOff.PNG";
-  } else {
-    gameMusic.play();
-    isMusicPlaying = true;
-
-    // and now they should display my on or off image depending on if music is on or off
-    musicIcon.src = "./assets/images/MusicNote.PNG";
-  }
-}
-
-//i have to set up the initial state of the music note
-function setupMusicIconImage() {
-  const musicIcon = document.getElementById("musicIcon");
-  musicIcon.alt = "Music Note";
-}
-
-document
-  .getElementById("toggleMusicButton")
-  .addEventListener("click", toggleMusic);
 
 //NAVIGATION
 
@@ -269,8 +241,5 @@ function goToLoading(destination) {
 
 //game start once page is loaded
 window.onload = () => {
-  setupMusicIconImage();
-  setGame();
   newGame();
-  
 };
