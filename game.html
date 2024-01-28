@@ -14,8 +14,8 @@
       <div class="gameOverTitle">
         <h2>Game Over!</h2>
       </div>
-      <div class="score">Score <span id="score">0</span></div>
     </div>
+    <div class="score">Score <span id="score">0</span></div>
     <div class="game-container">
       <!-- adding a visible timer to the game  -->
       <div class="timer-bar"></div>
@@ -27,43 +27,12 @@
         <h2 id="countdownNumber"></h2>
       </div>
 
-      <div class="row1">
-        <div class="hole">
-          <img src="assets/mole-transparent-bg-asset.png" alt="Mole" />
-        </div>
-        <div class="hole">
-          <img src="assets/mole-transparent-bg-asset.png" alt="Mole" />
-        </div>
-        <div class="hole">
-          <img src="assets/mole-transparent-bg-asset.png" alt="Mole" />
-        </div>
-      </div>
-      <div class="row2">
-        <div class="hole">
-          <img src="assets/mole-transparent-bg-asset.png" alt="Mole" />
-        </div>
-        <div class="hole">
-          <img src="assets/mole-transparent-bg-asset.png" alt="Mole" />
-        </div>
-        <div class="hole">
-          <img src="assets/mole-transparent-bg-asset.png" alt="Mole" />
-        </div>
-      </div>
-      <!--i think on top of animations, speechbubbles for the moles could be fun interactivity-->
+      <!-- 3x3 game board -->
+      <div id="board"></div>
 
       <div class="controls">
         <button id="goToTitleButton">Back to Home</button>
         <button id="restartButton">Restart Game</button>
-        <!-- going to add this dynamically with js instead -->
-      </div>
-      <div class="musicButton">
-        <button id="toggleMusicButton">
-          <img
-            id="musicIcon"
-            src="./assets/images/MusicNote.PNG"
-            alt="Music note"
-          />
-        </button>
       </div>
     </div>
     <div class="cursor"></div>

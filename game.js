@@ -1,81 +1,133 @@
-const holes = document.querySelectorAll(".hole");
+let currMoleTile;
+let currBombTile;
 let gameMusic;
 let isMusicPlaying = false;
 let score = 0;
+let canScore = true;
+const cooldownDuration = 500;
+let cooldownTimer;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
+let scoreElement = document.querySelector(".score");
+let timerBarElement = document.querySelector(".timer-bar");
+
 
 //GAME MECHANICS
 
-//function for random hole selection
-function randomHole() {
-  const index = Math.floor(Math.random() * holes.length); //this generates a number between 0 and the length of holes
-  return holes[index]; // this returns a a randomly generated value from the holes array
+function setGame() {
+  //setting up a grid
+  for (let i = 0; i < 9; i++) { //i starts at 0, continues to 8, stops at 9.
+    // so we'll have 9 holes insides individual divs with appropriate ids
+    let tile = document.createElement("div");
+    tile.id = i.toString();
+    tile.addEventListener('click', bonk);
+    document.getElementById("board").appendChild(tile);
+  }
+
+  setInterval(() => {
+    if (!timeUp) {
+      setMole();
+    }
+  }, 1000);
+
+  setInterval(() => {
+    if (!timeUp) {
+      setBomb();
+    }
+  }, 2500);
 }
-//function for making mole appear
-function molePeek() {
-  //this should genereate a random time for the mole to pop up
-  const time = Math.random() * 1000 + 500; //random timing
-  //specifically multiplying it by 1000 gives me a value between 0 and 1000 and adding 500 ensures the number will be at least 500millseconds
-  // so between 0.5 and 1.5 seconds
-  const hole = randomHole();
-  const moleImage = hole.querySelector("img"); //should put the mole image in the hole
-  moleImage.style.display = "block"; //mole image should appear now when molepeek function runs
-  moleImage.classList.add("up"); //adding 'up' to the hole to make the mole pop up
-  setTimeout(() => {
-    moleImage.classList.remove("up"); //timeout to make the mole disappear after a random time
-    moleImage.style.display = "none"; //mole should hide
-    if (!timeUp) molePeek();
-  }, time);
+
+function getRandomTile() {
+  // Math.random --> (0-1) * 9 = (0-9) --> round down to (0-8) integers
+  let num = Math.floor(Math.random() * 9);
+  // set number to string so we can set to id
+  return num.toString();
 }
 
-//function for whacking the mole
-function bonk(e) {
-  if (!e.isTrusted) return;
+function setMole() {
 
-  const moleImage = this.querySelector("img");
+  if (currMoleTile) {
+    currMoleTile.innerHTML = "";
+  }
 
-  //this will check if a mole is currently visible with the 'up' class
-  if (
-    moleImage.classList.contains("up") &&
-    !moleImage.classList.contains("clicked")
-  ) {
-    //now im checking for the up class given to our displayed moles
-    moleSqueak();
-    //so mole clicked confirms that this works
-    console.log("Mole clicked!");
-    //score increase!!
-    score++;
+  let mole = document.createElement('img');
+  mole.src = 'assets/mole-transparent-bg-asset.png';
+  mole.alt = 'Mole';
+  console.log('Mole spawned')
 
-    //score update!!
-    document.getElementById("score").textContent = score;
+  let num = getRandomTile();
+  if(currBombTile && currBombTile.id == num) {
+    return;
+  }
+  currMoleTile = document.getElementById(num);
+  currMoleTile.appendChild(mole);
+}
 
-    moleImage.style.display = "none"; //when the mole is hit it should disappear
+function setBomb() {
 
-    //now hide the mole after getting hit
-    this.classList.remove("up");
-    moleImage.classList.add("clicked");
-    console.log("Mole hidden!");
-    setTimeout(() => {
-      moleImage.classList.remove("clicked");
-    }, 1000);
+  if (currBombTile) {
+    currBombTile.innerHTML = "";
+  }
+
+  let bomb = document.createElement('img');
+  bomb.src = 'assets/images/bomb.PNG';
+  bomb.alt = "Bomb";
+  console.log('Bomb spawned')
+
+  let num = getRandomTile();
+  if(currMoleTile && currMoleTile.id == num) {
+    return;
+  }
+  currBombTile = document.getElementById(num);
+  currBombTile.appendChild(bomb);
+
+}
+
+function bonk() {
+
+  if (timeUp || !canScore) {
+    return;
+  }
+
+
+  if (this == currMoleTile) {
+    score += 10;
+    bonkSound = new Audio("assets/audio/mixkit-little-squeak-1018.wav");
+    currMoleTile.innerHTML = ""; //hide image
+   
+  } else if (this == currBombTile) {
+    score -= 20;
+    bonkSound = new Audio("assets/audio/small-explosion-129477.mp3");
+    // bonkSound = new Audio("assets/audio/small-dog-barking-84707.mp3");
+    currBombTile.innerHTML = "";
+  
+  }
+
+  //playing the bonk sound
+  if (bonkSound) {
+    bonkSound.currentTime = 0;
+    bonkSound.play();
+
+    //update score display
+    document.getElementById('score').innerHTML = score.toString();
+
+    canScore = false;
+    cooldownTimer = setTimeout(() => {
+      canScore = true;
+    }, cooldownDuration);
   }
 }
-//even listener for all holes, calling that bonk function
-holes.forEach((hole) => hole.addEventListener("click", bonk));
 
-// lets simplify the code
+// function for End Game
 function endGame() {
   console.log("Game over!");
   timeUp = true;
 
   let gameOverTitleElement = document.querySelector(".gameOverTitle");
-  let scoreElement = document.querySelector(".score");
   let gameoverContainer = document.querySelector(".gameOverMessage");
 
   gameOverTitleElement.style.display = "block";
-  scoreElement.style.display = "block";
   gameoverContainer.style.display = "block";
 }
 
@@ -137,6 +189,7 @@ function newGame() {
 
       if (countdownValue < 0) {
         clearInterval(countdownInterval);
+        setGame();
         startGame();
         //hide the element after countdown
         countdownNumberElement.style.display = "none";
@@ -156,41 +209,18 @@ function newGame() {
 function startGame() {
   console.log("Game started!");
   // adding game music
+  scoreElement.style.display = "flex";
+  timerBarElement.style.display = "block";
   gameMusic = new Audio("assets/audio/vodevil-15550.mp3");
   gameMusic.loop = true;
   gameMusic.volume = 0.2; //setting default to something lower its too loud
-
-  const volumeControl = document.createElement("input");
-  volumeControl.type = "range";
-  volumeControl.min = 0;
-  volumeControl.max = 1;
-  volumeControl.step = 0.1;
-  volumeControl.value = 1;
-  //styling
-  volumeControl.style.background = "linear-gradient(to right, blue, lightblue)"; //setting background color
-  volumeControl.style.border = "1px solid blue";
-  volumeControl.addEventListener("input", () => {
-    gameMusic.volume = volumeControl.value;
-  });
-
-  document.body.appendChild(volumeControl);
-
   gameMusic.play();
-
   //reset the score and game status
   score = 0;
   timeUp = false;
   let gameoverContainer = document.querySelector(".gameOverMessage");
 
   gameoverContainer.style.display = "none";
-
-  //update the score display
-  document.getElementById("score").textContent = score;
-  //moles start appearing
-  molePeek();
-  console.log("Mole peeking");
-
-  //going to add another 10 seconds
   startTimer(15000);
 }
 //mouse movement
@@ -213,33 +243,6 @@ function moleSqueak() {
   squeakSound.currentTime = 0; //set the current time to only the beginning second
   squeakSound.play();
 }
-
-function toggleMusic() {
-  const musicIcon = document.getElementById("musicIcon");
-
-  if (isMusicPlaying) {
-    gameMusic.pause();
-    isMusicPlaying = false;
-
-    musicIcon.src = "./assets/images/MusicNoteOff.PNG";
-  } else {
-    gameMusic.play();
-    isMusicPlaying = true;
-
-    // and now they should display my on or off image depending on if music is on or off
-    musicIcon.src = "./assets/images/MusicNote.PNG";
-  }
-}
-
-//i have to set up the initial state of the music note
-function setupMusicIconImage() {
-  const musicIcon = document.getElementById("musicIcon");
-  musicIcon.alt = "Music Note";
-}
-
-document
-  .getElementById("toggleMusicButton")
-  .addEventListener("click", toggleMusic);
 
 //NAVIGATION
 
@@ -265,6 +268,5 @@ function goToLoading(destination) {
 
 //game start once page is loaded
 window.onload = () => {
-  setupMusicIconImage();
   newGame();
 };
