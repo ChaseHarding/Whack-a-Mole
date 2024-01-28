@@ -48,8 +48,11 @@ Key concepts:
 ## Credits
 Music by <a href="https://pixabay.com/users/sergequadrado-24990007/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=15550">Sergei Chetvertnykh</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=15550">Pixabay</a>
 
-Sounds effects by <a href="https://mixkit.co/free-sound-effects/squeak/">Mixkit</a>
-
 Music by <a href="https://pixabay.com/users/xtremefreddy-32332307/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=146305">XtremeFreddy</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=146305">Pixabay</a>
 
+Sounds effects by <a href="https://mixkit.co/free-sound-effects/squeak/">Mixkit</a>
+
+Sound Effect by <a href="https://pixabay.com/users/dennish18-26151496/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=129477">Dennis</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=129477">Pixabay</a>
+
 Art by <a href="https://www.instagram.com/art.by.lgc/">art.by.lgc</a>
+
