@@ -3,6 +3,9 @@ let currBombTile;
 let gameMusic;
 let isMusicPlaying = false;
 let score = 0;
+let canScore = true;
+const cooldownDuration = 500;
+let cooldownTimer;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
@@ -22,8 +25,17 @@ function setGame() {
     document.getElementById("board").appendChild(tile);
   }
 
-  setInterval(setMole, 1000); //every 1 second we set a mole
-  setInterval(setBomb, 2500) //every 2.5 seconds we set a bomb
+  setInterval(() => {
+    if (!timeUp) {
+      setMole();
+    }
+  }, 1000);
+
+  setInterval(() => {
+    if (!timeUp) {
+      setBomb();
+    }
+  }, 2500);
 }
 
 function getRandomTile() {
@@ -74,6 +86,11 @@ function setBomb() {
 
 function bonk() {
 
+  if (timeUp || !canScore) {
+    return;
+  }
+
+
   if (this == currMoleTile) {
     score += 10;
     bonkSound = new Audio("assets/audio/mixkit-little-squeak-1018.wav");
@@ -94,6 +111,11 @@ function bonk() {
 
     //update score display
     document.getElementById('score').innerHTML = score.toString();
+
+    canScore = false;
+    cooldownTimer = setTimeout(() => {
+      canScore = true;
+    }, cooldownDuration);
   }
 }
 
