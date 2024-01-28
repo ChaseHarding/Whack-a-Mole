@@ -6,6 +6,8 @@ let score = 0;
 const countdownNumberElement = document.getElementById("countdownNumber");
 const countdownBackgroundElement = document.getElementById("countdown");
 const cursor = document.querySelector(".cursor");
+let scoreElement = document.querySelector(".score");
+let timerBarElement = document.querySelector(".timer-bar");
 
 
 //GAME MECHANICS
@@ -185,6 +187,8 @@ function newGame() {
 function startGame() {
   console.log("Game started!");
   // adding game music
+  scoreElement.style.display = "flex";
+  timerBarElement.style.display = "block";
   gameMusic = new Audio("assets/audio/vodevil-15550.mp3");
   gameMusic.loop = true;
   gameMusic.volume = 0.2; //setting default to something lower its too loud
