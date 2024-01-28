@@ -78,7 +78,8 @@ function bonk() {
     currMoleTile.innerHTML = ""; //hide image
    
   } else if (this == currBombTile) {
-    score -= 10;
+    score -= 20;
+    bonkSound = new Audio("assets/audio/small-explosion-129477.mp3");
     // bonkSound = new Audio("assets/audio/small-dog-barking-84707.mp3");
     currBombTile.innerHTML = "";
   
