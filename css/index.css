@@ -5,7 +5,7 @@ body {
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-image: url('./assets/images/BackgroundTitle.PNG');
+    background-image: url('../assets/images/BackgroundTitle.PNG');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
