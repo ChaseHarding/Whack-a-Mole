@@ -1,4 +1,5 @@
 @use 'variables';
+@use 'animations' as anim;
 
 .board {
     display: flex;
@@ -14,5 +15,5 @@
 .title {
     font-size: 25px;
     margin-bottom: 20px;
-    animation: bounceIn 1.5s ease-out infinite;
+    @include anim.bounceIn;
 }
