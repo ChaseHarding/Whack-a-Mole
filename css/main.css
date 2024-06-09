@@ -37,11 +37,67 @@ h1 {
   background: rgb(94, 45, 17);
   box-shadow: 10px 10px 0 0 #000, 0 0 10px #000;
 }
-
-.title {
+.board .title {
   font-size: 25px;
   margin-bottom: 20px;
   animation: bounceIn 1.5s infinite;
+}
+
+.howToPlayBox {
+  display: none;
+  position: absolute;
+  top: 50%;
+  padding: 20px;
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 400;
+  border-radius: 15px;
+  background-color: #ff9114;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  max-width: 40%;
+  max-height: 50%;
+  overflow: auto;
+}
+
+.allButtons {
+  height: 250px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#startButton, #howToPlayButton {
+  gap: 30px;
+  padding: 15px;
+  margin: 5px 5px;
+  background: #5AC23D;
+  border-radius: 20px;
+  height: 100px;
+  width: 10em;
+  color: white;
+  font-family: "Chakra Petch", sans-serif;
+}
+#startButton:hover, #howToPlayButton:hover {
+  background: #abff93;
+  color: black;
+  cursor: pointer;
+}
+
+#howToPlayButton {
+  z-index: 1;
+}
+
+#toggleMusicButton {
+  background: transparent;
+  border: none;
+  width: 68px;
+  height: 68px;
+}
+
+#musicIcon {
+  padding: 10px;
+  background: transparent;
 }
 
 /*# sourceMappingURL=main.css.map */

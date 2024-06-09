@@ -10,10 +10,10 @@
     background: variables.$board-background;
     box-shadow: 10px 10px 0 0 variables.$box-shadow-color,
                 0 0 10px variables.$box-shadow-color;
+    .title {
+        font-size: 25px;
+        margin-bottom: 20px;
+        @include anim.bounceIn;
+    }
 }
 
-.title {
-    font-size: 25px;
-    margin-bottom: 20px;
-    @include anim.bounceIn;
-}
