@@ -1,0 +1,20 @@
+@use 'variables';
+
+body{ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-image: variables.$background-image;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    user-select: none;
+}
+
+h1 {
+    color: variables.$primary-color;
+    font-family: 'Acme', sans-serif;
+}

@@ -1,0 +1,103 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  background-image: url("../assets/images/BackgroundTitle.PNG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  user-select: none;
+}
+
+h1 {
+  color: #5AC23D;
+  font-family: "Acme", sans-serif;
+}
+
+@keyframes bounceIn {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(30px);
+  }
+  60% {
+    transform: translateY(15px);
+  }
+}
+.board {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 25px;
+  border: 2px solid rbg(58, 6, 6);
+  background: rgb(94, 45, 17);
+  box-shadow: 10px 10px 0 0 #000, 0 0 10px #000;
+}
+.board .title {
+  font-size: 25px;
+  margin-bottom: 20px;
+  animation: bounceIn 1.5s infinite;
+}
+
+.howToPlayBox {
+  display: none;
+  position: absolute;
+  top: 50%;
+  padding: 20px;
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 400;
+  border-radius: 15px;
+  background-color: #ff9114;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  max-width: 40%;
+  max-height: 50%;
+  overflow: auto;
+}
+
+.allButtons {
+  height: 250px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#startButton, #howToPlayButton {
+  gap: 30px;
+  padding: 15px;
+  margin: 5px 5px;
+  background: #5AC23D;
+  border-radius: 20px;
+  height: 100px;
+  width: 10em;
+  color: white;
+  font-family: "Chakra Petch", sans-serif;
+}
+#startButton:hover, #howToPlayButton:hover {
+  background: #abff93;
+  color: black;
+  cursor: pointer;
+}
+
+#howToPlayButton {
+  z-index: 1;
+}
+
+#toggleMusicButton {
+  background: transparent;
+  border: none;
+  width: 68px;
+  height: 68px;
+}
+
+#musicIcon {
+  padding: 10px;
+  background: transparent;
+}
+
+/*# sourceMappingURL=main.css.map */

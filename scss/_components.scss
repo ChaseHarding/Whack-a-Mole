@@ -1,0 +1,19 @@
+@use 'variables';
+@use 'animations' as anim;
+
+.board {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 25px;
+    border: 2px solid variables.$board-border-color;
+    background: variables.$board-background;
+    box-shadow: 10px 10px 0 0 variables.$box-shadow-color,
+                0 0 10px variables.$box-shadow-color;
+    .title {
+        font-size: 25px;
+        margin-bottom: 20px;
+        @include anim.bounceIn;
+    }
+}
+
