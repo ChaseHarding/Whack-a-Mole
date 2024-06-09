@@ -1,3 +1,5 @@
+@use 'variables';
+
 body{ 
     display: flex;
     align-items: center;
@@ -5,7 +7,7 @@ body{
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-image: $background-image;
+    background-image: variables.$background-image;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -13,6 +15,6 @@ body{
 }
 
 h1 {
-    color: $primary-color;
+    color: variables.$primary-color;
     font-family: 'Acme', sans-serif;
 }

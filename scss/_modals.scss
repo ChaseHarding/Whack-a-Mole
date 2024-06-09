@@ -1,0 +1,22 @@
+.howToPlayBox {
+    display: none;
+    position: absolute;
+    top: 50%;
+    padding: 20px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 400;
+    border-radius: 15px;
+    background-color: #ff9114;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    max-width: 40%;
+    max-height: 50%;
+    overflow: auto;
+}
+
+.closeButton {
+    position: absolute;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
