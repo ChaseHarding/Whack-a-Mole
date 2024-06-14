@@ -12,9 +12,9 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     user-select: none;
+    h1 {
+        color: variables.$primary-color;
+        font-family: 'Acme', sans-serif;
+    }
 }
 
-h1 {
-    color: variables.$primary-color;
-    font-family: 'Acme', sans-serif;
-}
